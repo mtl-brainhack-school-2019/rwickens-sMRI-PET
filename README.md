@@ -1,5 +1,5 @@
 # smri
-My intention was to create a machine learning classifier that accurately classifies diagnosis (Alzheimer's, REM sleep behaviour disorder, Parkinson's, or healthy control) based on image features and possibly clinical variables. However, Jake has informed me (2019-08-13) that this is not advisable due to my sample size.   
+My intention was to create a machine learning classifier that accurately classifies diagnosis (Alzheimer's, REM sleep behaviour disorder, Parkinson's, or healthy control) based on image features and clinical variables. However, Jake has informed me (2019-08-13) that this is not advisable due to my sample size.   
 
 I have re-adjusted my goals as follows:  
 
