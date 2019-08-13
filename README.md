@@ -1,4 +1,4 @@
-# smri
+# Structural MRI
 My intention was to create a machine learning classifier that accurately classifies diagnosis (Alzheimer's, REM sleep behaviour disorder, Parkinson's, or healthy control) based on image features and clinical variables from my lab's dataset. However, Jake has informed me (2019-08-13) that this is not advisable due to my sample size.   
 
 I have re-adjusted my goals as follows:  
