@@ -5,8 +5,8 @@ I have re-adjusted my goals as follows:
 
 Week 1: 
 
-Pre-process my laboratory's sMRI and PET (FDG/NAV) data/
-  Working in Linux to work with .mnc format/
+Pre-process my laboratory's sMRI and PET (FDG/NAV) data/n
+  Working in Linux to work with .mnc format/n
   Follow the lab's current pipeline (includes CIVET) and internalize it/
 Generate t-maps/
 
