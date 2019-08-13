@@ -29,7 +29,7 @@ I also have the following participant data:
 -Demographic variables for all subjects (e.g., age, education)
 -For the Alzheimer's study - NAV- and FDG-PET data
 -For the REM sleep behaviour disorder: 
-    -Clinical data : UPDRS scale, medical info, odour tests, hue tests, MoCA, and others
-    -Movement-related: Timed-up-and-go, purdue pegboard
+    -Clinical data: UPDRS scale, medical info, odour tests, hue tests, MoCA, and others
+    -Movement-related data: Timed-up-and-go, purdue pegboard
     -Polysomnography data: sleep architecture, %EMG (phasic and tonic) during REM sleep
 -For the Parkinson's study: UPDRS scale, autonomic function, Levodopa dose, disease duration, incomplete neuropsychological testing. 
