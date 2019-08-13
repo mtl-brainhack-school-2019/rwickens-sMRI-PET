@@ -9,6 +9,8 @@ Week 1:
   -Follow the lab's current pipeline (includes CIVET) and internalize it
 -Generate t-maps
 
+For these processes, I will use Linux on VirtualBox, which has MINCtools installed, as well as RMINC and R. However, I need to resolve an issue: when I open RStudio, I get a blank screen; there seems to be a driver issue ("FBconfig), and RStudio cannot access R. 
+
 Week 2: 
 
 -Download PREVENT-AD and OASIS datasets
