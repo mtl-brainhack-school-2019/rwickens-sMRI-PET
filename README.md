@@ -5,8 +5,9 @@ I have re-adjusted my goals as follows:
 
 PROJECT 1:  
 
-- Make sense of the lab's PET pipeline. Currently, the document is confusing and has hindered my ability to grasp the steps.
-- Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV) data
+- Make sense of my lab's PET pipeline. Currently, the document is confusing and has hindered my ability to grasp the steps.
+- Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV tracer) data
+--To achieve this, I need to become comfortable working with CBRAIN and CIVET
 - Generate statistical t-maps of PET data
 - If time allows, improve the document explaining the pipeline 
 - If time allows, attempt using MAGeT brain
