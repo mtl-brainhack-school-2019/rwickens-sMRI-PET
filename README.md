@@ -9,31 +9,31 @@ PROJECT 1:
 - Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV) data
 - Generate statistical t-maps of PET data
 - If time allows, improve the document explaining the pipeline 
-- Look at using MAGeT brain
+- If time allows, attempt using MAGeT brain
 
 For these processes, I will use Linux on VirtualBox, which has MINCTOOLS, R, and RMINC installed. I might want to fix a bug that involves opening RStudio and getting a blank screen; there seems to be a driver issue ("FBconfig), and RStudio cannot access R. 
 
 PROJECT 2: 
 
--Download PREVENT-AD and OASIS datasets
--Pre-process MRI files to make them analysis-ready
--Feature extraction
--Dimensionality reduction
--Machine learning with Nilearn 
--Type of analysis to be determined
+- Download PREVENT-AD and OASIS datasets
+- Pre-process MRI files to make them analysis-ready
+- Feature extraction
+- Dimensionality reduction
+- Machine learning with Nilearn 
+- Type of analysis to be determined
 
 Information about my lab's data: 
 
--Alzheimer’s disease (n = 12; 6 AD and 6 controls). 1.5T scanner. 
--Parkinson's disease (n = 18; 6 PD - cognitively normal, 6 PD - executive dysfunction, 6 controls). 3T scanner. 
--Idiopathic REM sleep behaviour disorder (n = 10; 5 with RBD and 5 controls). 3T scanner. 
+- Alzheimer’s disease (n = 12; 6 AD and 6 controls). 1.5T scanner. 
+- Parkinson's disease (n = 18; 6 PD - cognitively normal, 6 PD - executive dysfunction, 6 controls). 3T scanner. 
+- Idiopathic REM sleep behaviour disorder (n = 10; 5 with RBD and 5 controls). 3T scanner. 
  
 I also have the following participant data:
 
--Demographic variables for all subjects (e.g., age, education)
--For the Alzheimer's study - NAV- and FDG-PET data
--For the REM sleep behaviour disorder: 
-    -Clinical data: UPDRS scale, medical info, odour tests, hue tests, MoCA, and others
-    -Movement-related data: Timed-up-and-go, purdue pegboard
-    -Polysomnography data: sleep architecture, %EMG (phasic and tonic) during REM sleep
--For the Parkinson's study: UPDRS scale, autonomic function, Levodopa dose, disease duration, incomplete neuropsychological testing. 
+- Demographic variables for all subjects (e.g., age, education)
+- For the Alzheimer's study - NAV- and FDG-PET data
+- For the REM sleep behaviour disorder: 
+    - Clinical data: UPDRS scale, medical info, odour tests, hue tests, MoCA, and others
+    - Movement-related data: Timed-up-and-go, purdue pegboard
+    - Polysomnography data: sleep architecture, %EMG (phasic and tonic) during REM sleep
+- For the Parkinson's study: UPDRS scale, autonomic function, Levodopa dose, disease duration, incomplete neuropsychological testing. 
