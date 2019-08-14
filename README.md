@@ -11,8 +11,6 @@ PROJECT 1:
 
 Deliverable: a Jupyter notebook with detailed steps - an improvement of the instructions file that I received. 
 
-(For these processes, I will use Linux on VirtualBox, which has MINCTOOLS, R, and RMINC installed. I might want to fix a bug that involves opening RStudio and getting a blank screen; there seems to be a driver issue ("FBconfig), and RStudio cannot access R.) 
-
 PROJECT 2: 
 
 - Download PREVENT-AD and OASIS datasets
