@@ -1,17 +1,19 @@
 # Structural MRI
-My intention was to create a machine learning classifier that accurately classifies diagnosis (Alzheimer's, REM sleep behaviour disorder, Parkinson's, or healthy control) based on image features and clinical variables from my lab's dataset. However, Jake has informed me (2019-08-13) that this is not advisable due to my sample size.   
+My intention was to create a machine learning classifier that accurately classifies diagnosis (Alzheimer's, REM sleep behaviour disorder, Parkinson's, or healthy control) based on image features and clinical variables from my lab's dataset. However, Jake has informed me (2019-08-13) that this is not advisable due to sample size.   
 
 I have re-adjusted my goals as follows:  
 
-Week 1: 
+PROJECT 1:  
 
--Pre-process my laboratory's sMRI and PET (FDG/NAV) data
-  -Follow the lab's current pipeline (includes CIVET) and internalize it
--Generate t-maps
+- Make sense of the lab's PET pipeline. Currently, the document is confusing and has hindered my ability to grasp the steps.
+- Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV) data
+- Generate statistical t-maps of PET data
+- If time allows, improve the document explaining the pipeline 
+- Look at using MAGeT brain
 
-For these processes, I will use Linux on VirtualBox, which has MINCtools installed, as well as RMINC and R. However, I need to resolve an issue: when I open RStudio, I get a blank screen; there seems to be a driver issue ("FBconfig), and RStudio cannot access R. 
+For these processes, I will use Linux on VirtualBox, which has MINCTOOLS, R, and RMINC installed. I might want to fix a bug that involves opening RStudio and getting a blank screen; there seems to be a driver issue ("FBconfig), and RStudio cannot access R. 
 
-Week 2: 
+PROJECT 2: 
 
 -Download PREVENT-AD and OASIS datasets
 -Pre-process MRI files to make them analysis-ready
