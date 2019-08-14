@@ -9,7 +9,9 @@ PROJECT 1:
 - If time allows, improve the document explaining the pipeline 
 - If time allows, attempt using MAGeT brain
 
-For these processes, I will use Linux on VirtualBox, which has MINCTOOLS, R, and RMINC installed. I might want to fix a bug that involves opening RStudio and getting a blank screen; there seems to be a driver issue ("FBconfig), and RStudio cannot access R. 
+Deliverable: a Jupyter notebook with detailed steps - an improvement of the instructions file that I received. 
+
+(For these processes, I will use Linux on VirtualBox, which has MINCTOOLS, R, and RMINC installed. I might want to fix a bug that involves opening RStudio and getting a blank screen; there seems to be a driver issue ("FBconfig), and RStudio cannot access R.) 
 
 PROJECT 2: 
 
@@ -37,3 +39,7 @@ I also have the following participant data:
     - Movement-related data: Timed-up-and-go, purdue pegboard
     - Polysomnography data: sleep architecture, %EMG (phasic and tonic) during REM sleep
 - For the Parkinson's study: UPDRS scale, autonomic function, Levodopa dose, disease duration, incomplete neuropsychological testing. 
+
+-------------
+
+My intention was to create a machine learning classifier that accurately classifies diagnosis (Alzheimer's, REM sleep behaviour disorder, Parkinson's, or healthy control) based on image features and clinical variables from my lab's dataset. However, Jake has informed me (2019-08-13) that this is not advisable due to sample size.   
