@@ -22,6 +22,8 @@ PROJECT 2:
 - Machine learning with Nilearn 
 - Type of analysis to be determined
 
+----------------------------
+
 Information about my lab's data: 
 
 - Alzheimer’s disease (n = 12; 6 AD and 6 controls). 1.5T scanner. 
