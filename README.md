@@ -18,7 +18,7 @@ PROJECT 1:
 - Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV tracer) data
   - To achieve this, I need to become comfortable working with CBRAIN and CIVET
 -	Run this same data thru Freesurfer and Dartel and/or ANTS
-  - This will expose me to the more popular alternative of CIVET
+    - This will expose me to the more popular alternative of CIVET
 - (If time allows, run data through MAGeT brain)
 
 **Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Comprised of shell commands. Briefly explains the rationale behind the processing steps. This will help all future lab members of our lab!**
