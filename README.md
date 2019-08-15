@@ -6,7 +6,8 @@
 -	Which tools do you want to learn? 
   - **MINC, CIVET, CBRAIN, PYMINC, NILEARN**
 - Which kind of deliverable do you want to implement: analysis, code, data, tutorial...? 
-  - **Tutorial of jupyter code for Project 1, and well-commented jupyter code and statistical analyses for Project 2.** 
+  - **Tutorial of jupyter code for Project 1**
+  - **Well-commented jupyter code and statistical analyses for Project 2.** 
 - What kind of medium will you use to present the results? 
   - **For both, I intend on giving a powerpoint presentation in which I run through these jupyter files.**
 
