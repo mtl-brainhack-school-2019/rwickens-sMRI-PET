@@ -11,13 +11,16 @@
 - What kind of medium will you use to present the results? 
   - For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. I plan on uploading the jupyter files on GitHub and disseminating it to my lab members.
 
+#Project 1: sMRI / PET PREPROCESSING 
+
+- Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
+
+Exhibit A: 
+
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> 
 
-PROJECT 1:  
-
-- Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
 - Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV tracer) data
   - To achieve this, I need to become comfortable working with CBRAIN and CIVET
 -	Run this same data thru Freesurfer and Dartel and/or ANTS
@@ -26,7 +29,7 @@ PROJECT 1:
 
 **Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Comprised of shell commands. Briefly explains the rationale behind the processing steps. This will help all future lab members of our lab!**
 
-PROJECT 2: 
+#PROJECT 2: 
 
 - Download PREVENT-AD and OASIS datasets
 - Feature extraction (use of python, numpy and pandas) 
