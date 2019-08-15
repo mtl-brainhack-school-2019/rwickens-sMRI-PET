@@ -13,6 +13,8 @@
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> 
+
 PROJECT 1:  
 
 - Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
