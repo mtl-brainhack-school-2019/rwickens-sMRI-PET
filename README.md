@@ -5,8 +5,7 @@ PROJECT 1:
 - Make sense of my lab's PET pipeline. Currently, the document is confusing and has hindered my ability to grasp the steps.
 - Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV tracer) data
   - To achieve this, I need to become comfortable working with CBRAIN and CIVET
-- Run this same data through 
--	Run my own data thru Freesurfer and Dartel and/or ANTS
+-	Run this same data thru Freesurfer and Dartel and/or ANTS
   - This will expose me to an alternative of CIVET
 - (If time allows, run data through MAGeT brain)
 
