@@ -1,16 +1,15 @@
 # Structural MRI
 
-
-
 - Which dataset do you want to analyze (if any)? 
-  - **Those of my lab (described below), followed by the OASIS or PREVENT-AD datasets**
+  - Those of my lab (described below)
+  - Then, the OASIS or PREVENT-AD datasets
 -	Which tools do you want to learn? 
-    - **MINC, CIVET, CBRAIN, PYMINC, FREESURFER, DARTEL, NILEARN**
+    - MINC, CIVET, CBRAIN, PYMINC, FREESURFER, DARTEL, NILEARN
 - Which kind of deliverable do you want to implement: analysis, code, data, tutorial...? 
-  - **Project 1: Tutorial of jupyter code**
-  - **Project 2: Well-commented jupyter file containing code and statistical analyses as well as plot outputs 2.** 
+  - Project 1: Tutorial of jupyter code
+  - Project 2: Well-commented jupyter file containing code and statistical analyses as well as plot outputs 2. 
 - What kind of medium will you use to present the results? 
-  - **For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. I plan on uploading the jupyter files on GitHub and disseminating it to my lab members.**
+  - For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. I plan on uploading the jupyter files on GitHub and disseminating it to my lab members.
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
