@@ -1,4 +1,4 @@
-# Structural MRI  
+# Structural MRI
 
 PROJECT 1:  
 
