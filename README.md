@@ -1,5 +1,12 @@
 # Structural MRI
 
+
+- Which dataset do you want to analyze (if any)? **Those of my lab (described below), followed by the OASIS or PREVENT-AD datasets**
+-	Which tools do you want to learn? **MINC, CIVET, CBRAIN, PYMINC, NILEARN**
+•	Which kind of deliverable do you want to implement: analysis, code, data, tutorial...? **Tutorial of jupyter code for Project 1, and well-commented jupyter code and statistical analyses for Project 2.** 
+•	What kind of medium will you use to present the results? **For both, I intend on giving a powerpoint presentation in which I run through these jupyter files.**
+
+
 PROJECT 1:  
 
 - Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
@@ -21,13 +28,6 @@ PROJECT 2:
 
 Deliverable: a Jupyter notebook that shows each of the above steps. 
 
-----------------------------
-
-
-- Which dataset do you want to analyze (if any)? *Those of my lab (described below), followed by the OASIS or PREVENT-AD datasets
--	Which tools do you want to learn? *MINC, CIVET, CBRAIN, PYMINC, NILEARN
-•	Which kind of deliverable do you want to implement: analysis, code, data, tutorial...? *Well-comented jupyter code for Project 1, and well-commented jupyter analyses / code for Project 2. 
-•	What kind of medium will you use to present the results? For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. 
 
 ---------------------------
 
