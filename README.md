@@ -12,7 +12,7 @@
 - What kind of medium will you use to present the results? 
   - **For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. I plan on uploading the jupyter files on GitHub and disseminating it to my lab members.**
 
-![STEPS](Wtf.png)
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
 PROJECT 1:  
 
