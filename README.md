@@ -21,7 +21,7 @@ PROJECT 1:
   - This will expose me to the more popular alternative of CIVET
 - (If time allows, run data through MAGeT brain)
 
-Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Includes shell commands. Briefly explains the rationale behind the order of steps.  
+**Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Comprised of shell commands. Briefly explains the rationale behind the processing steps. This will help all future lab members of our lab!**
 
 PROJECT 2: 
 
