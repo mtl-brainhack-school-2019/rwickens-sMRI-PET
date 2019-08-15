@@ -9,16 +9,18 @@ PROJECT 1:
 - If time allows, improve the document explaining the pipeline 
 - If time allows, attempt using MAGeT brain
 
-Deliverable: a Jupyter notebook with detailed steps - an improvement of the instructions file that I received. 
+Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Includes shell commands. Briefly explains the rationale behind the order of steps.  
 
 PROJECT 2: 
 
 - Download PREVENT-AD and OASIS datasets
 - Pre-process MRI files to make them analysis-ready
 - Feature extraction
-- Dimensionality reduction
+- Dimensionality reduction using PCA
 - Machine learning with Nilearn 
 - Type of analysis to be determined
+
+Deliverable: a Jupyter notebook that shows each of the above steps. 
 
 ----------------------------
 
