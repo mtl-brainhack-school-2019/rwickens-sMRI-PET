@@ -1,6 +1,7 @@
 # Structural MRI
 
 
+
 - Which dataset do you want to analyze (if any)? 
   - **Those of my lab (described below), followed by the OASIS or PREVENT-AD datasets**
 -	Which tools do you want to learn? 
