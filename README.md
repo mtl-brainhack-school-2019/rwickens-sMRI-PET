@@ -14,8 +14,7 @@ Deliverable: a Jupyter notebook that improves the instruction sheet that I was g
 PROJECT 2: 
 
 - Download PREVENT-AD and OASIS datasets
-- Pre-process MRI files to make them analysis-ready
-- Feature extraction
+- Feature extraction (use of python, numpy and pandas) 
 - Dimensionality reduction using PCA
 - Machine learning with Nilearn 
 - Type of analysis to be determined
