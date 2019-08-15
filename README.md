@@ -6,15 +6,18 @@
 -	Which tools do you want to learn? 
     - **MINC, CIVET, CBRAIN, PYMINC, FREESURFER, DARTEL, NILEARN**
 - Which kind of deliverable do you want to implement: analysis, code, data, tutorial...? 
-  - **Tutorial of jupyter code for Project 1**
-  - **Well-commented jupyter code and statistical analyses for Project 2.** 
+  - **Project 1: Tutorial of jupyter code for Project 1**
+  - **Project 2: Well-commented jupyter file containing code and statistical analyses for Project 2.** 
 - What kind of medium will you use to present the results? 
-  - **For both, I intend on giving a powerpoint presentation in which I run through these jupyter files.**
+  - **For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. I plan on uploading the jupyter files on GitHub and disseminating it to my lab members.**
 
 
 PROJECT 1:  
 
 - Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
+
+![FEOBV Command Snippet](C:\Users\rwick\Desktop\Wtf.png)
+
 - Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV tracer) data
   - To achieve this, I need to become comfortable working with CBRAIN and CIVET
 -	Run this same data thru Freesurfer and Dartel and/or ANTS
