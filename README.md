@@ -15,9 +15,6 @@
 PROJECT 1:  
 
 - Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
-
-![FEOBV Command Snippet](C:\Users\rwick\Desktop\Wtf.png)
-
 - Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV tracer) data
   - To achieve this, I need to become comfortable working with CBRAIN and CIVET
 -	Run this same data thru Freesurfer and Dartel and/or ANTS
