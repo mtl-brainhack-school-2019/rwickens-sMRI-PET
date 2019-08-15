@@ -1,16 +1,5 @@
 # Structural MRI
 
-- Which dataset do you want to analyze (if any)? 
-  - Those of my lab (described below)
-  - Then, the OASIS or PREVENT-AD datasets
--	Which tools do you want to learn? 
-    - MINC, CIVET, CBRAIN, PYMINC, FREESURFER, DARTEL, NILEARN
-- Which kind of deliverable do you want to implement: analysis, code, data, tutorial...? 
-  - Project 1: Tutorial of jupyter code
-  - Project 2: Well-commented jupyter file containing code and statistical analyses as well as plot outputs 2. 
-- What kind of medium will you use to present the results? 
-  - For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. I plan on uploading the jupyter files on GitHub and disseminating it to my lab members.
-
 #Project 1: sMRI / PET PREPROCESSING 
 
 - Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
@@ -61,3 +50,14 @@ I also have the following participant data:
 -------------
 
 My intention was to create a machine learning classifier that accurately classifies diagnosis (Alzheimer's, REM sleep behaviour disorder, Parkinson's, or healthy control) based on image features and clinical variables from my lab's dataset. However, Jake has informed me (2019-08-13) that this is not advisable due to sample size.   
+
+- Which dataset do you want to analyze (if any)? 
+  - Those of my lab (described below)
+  - Then, the OASIS or PREVENT-AD datasets
+-	Which tools do you want to learn? 
+    - MINC, CIVET, CBRAIN, PYMINC, FREESURFER, DARTEL, NILEARN
+- Which kind of deliverable do you want to implement: analysis, code, data, tutorial...? 
+  - Project 1: Tutorial of jupyter code
+  - Project 2: Well-commented jupyter file containing code and statistical analyses as well as plot outputs 2. 
+- What kind of medium will you use to present the results? 
+  - For both, I intend on giving a powerpoint presentation in which I run through these jupyter files. I plan on uploading the jupyter files on GitHub and disseminating it to my lab members.
