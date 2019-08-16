@@ -42,6 +42,8 @@ A Jupyter notebook with clarified pipeline instructions.
 
 This will hopefully ease stress of future lab members. 
 
+In the future, I would like to write a script to automate these preprocessing steps.  
+
 ## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML CLASSIFIER. 
 
 I plan to then switch gears to machine learning on large structural MRI datasets of individuals with Alzheimer's disease (AD). I would like to create a classifier to determine whether scan comes from an individual with AD or a healthy control.  in Alzheimer's disease populations. Soon I hope to apply ML to my lab's data, which involves Alzheimer's and Parkinson's disease subjects. 
@@ -70,5 +72,7 @@ A Jupyter notebook walking through each of the above steps, with plots saved inl
 ### Medium
 I will present these jupyter notebooks in a lab meeting and provide them to the lab via Github.
 
+# COMMENTS?! FEEDBACK?! 
+# THANKS !
 
 ---------------------------------------------
