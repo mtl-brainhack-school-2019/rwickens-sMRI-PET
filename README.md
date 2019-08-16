@@ -23,7 +23,7 @@ This part I'm less excited about. Why?
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=60> 
 
 Goals: 
 
@@ -32,9 +32,9 @@ Goals:
   - To achieve this, I need to become comfortable working with minctools, CBrain, CIVET
 - (If time allows, run data through ANTS, dartel)
 
-###Deliverable 1:
+###Deliverable 1
 
-!['Deliverable'](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62)
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=150> 
 
 A Jupyter notebook with clarified pipeline instructions. 
 - Involves bash commands. 
@@ -55,11 +55,11 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 - Learn how to perform cross-validation thanks to break-out session
 -Matplotlib plots along the way to visualize correlation matrices / PCA, etc. 
 
-!['Random forest'](https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg)
+<img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
-###Deliverable 2: 
+###Deliverable 2
 
-!['Deliverable'](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62)
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=150> 
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.  
 
@@ -69,4 +69,4 @@ Medium: Present these jupyter notebooks in a lab meeting and provide them on Git
 
 Summary of tools I want to learn: 
 
-MINC, CBRAIN, CIVET, FREESURFER, DARTEL, SCIKIT LEARN, NILEARN
+MINC, CBRAIN, CIVET, BASH, SCIKIT LEARN, NILEARN
