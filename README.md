@@ -1,6 +1,6 @@
 # STRUCTURAL MRI EXPLORATION
 
-My lab's focus is a PET radiotracer that shows great promise in quantifying brain acetylcholine. We are interested in applying this technique for imaging neurodegenerative conditions. 
+My lab's focus is a PET radiotracer that shows great promise in quantifying brain cholinergic systems. We are interested in applying this technique for imaging neurodegenerative conditions. 
 
 As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
@@ -12,6 +12,8 @@ At a birds-eye-view, my plans are as follows:
 
 1. Grasp the current pipeline and replicate it on previous data.  
 2. Learn about software and statistical techniques that I can implement in the lab.   
+
+-----------------------
 
 ## PROJECT 1: LEARN PREPROCESSING PIPELINE 
 
@@ -45,7 +47,9 @@ A Jupyter notebook with clarified pipeline instructions.
 
 This will hopefully ease stress of future lab members. 
 
-In the future, I would like to write a script to automate our lab's preprocessing.   
+In the future, I would like to write a script to automate our lab's preprocessing.
+
+-------------
 
 ## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML CLASSIFIER. 
 
@@ -68,11 +72,17 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 
 ### Deliverable 2
 
+
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.  
 
+-------------
+
 ### Medium
+
+
+
 I will present these jupyter notebooks in a lab meeting and provide them to the lab via Github.
 
 
