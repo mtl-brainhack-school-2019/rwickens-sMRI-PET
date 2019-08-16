@@ -1,4 +1,4 @@
-# Structural MRI
+# STRUCTURAL MRI EXPLORATION
 
 My lab's focus is a PET radiotracer that shows great promise in quantifying brain acetylcholine.  
 
@@ -13,7 +13,7 @@ At a birds-eye-view, my plans are as follows:
 1. Grasp and replicate the current pipeline on my lab's past data.  
 2. Learn about software and statistical techniques that I can implement in the lab.   
 
-#Project 1: LEARN PREPROCESSING PIPELINE 
+## PROJECT 1: LEARN PREPROCESSING PIPELINE 
 
 This part I'm less excited about. Why?
 
@@ -23,18 +23,18 @@ This part I'm less excited about. Why?
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=800> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=500> 
 
-Goals: 
+### Goals
 
 - Understand my lab's preprocessing pipeline.   
 - Successfully replicate it. 
   - To achieve this, I need to become comfortable working with minctools, CBrain, CIVET
 - (If time allows, run data through ANTS, dartel)
 
-##Deliverable 1
+### Deliverable 1
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=150> 
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
 
 A Jupyter notebook with clarified pipeline instructions. 
 - Involves bash commands. 
@@ -42,9 +42,11 @@ A Jupyter notebook with clarified pipeline instructions.
 
 This will hopefully ease stress of future lab members. 
 
-#PROJECT 2: STRUCTURAL MRI ANALYSIS - ML. 
+## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML. 
 
 I plan to then switch gears to machine learning on large structural MRI datasets, specifically in Alzheimer's disease populations. Soon I hope to apply ML to my lab's data, which involves Alzheimer's and Parkinson's disease subjects. 
+
+### Goals
 
 - Download PREVENT-AD and OASIS datasets
  - Feature extraction: I will stick to measures of cortical thickness, brain volume, and other basic morphology. 
@@ -60,14 +62,9 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 
 ##Deliverable 2
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=150> 
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.  
 
----------------------------
-
-Medium: Present these jupyter notebooks in a lab meeting and provide them on Github and lab Dropbox.  
-
-Summary of tools I want to learn: 
-
-MINC, CBRAIN, CIVET, BASH, SCIKIT LEARN, NILEARN
+## Medium
+I will present these jupyter notebooks in a lab meeting and provide them to the lab via Github.
