@@ -68,10 +68,12 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 - Nilearn to implement the above  
 - Matplotlib plots along the way to visualize correlation matrices, model error, ROC curve, etc.
 
-If extra time allows, look into: 
+If extra time allows, delve into: 
 
-- Longitudinal data? 
-- Model to predict onset of disease conversion?
+- Longitudinal data 
+- Model to predict onset of disease conversion
+    - Survival analysis / trees?
+    - Cox / hazards functions?
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
