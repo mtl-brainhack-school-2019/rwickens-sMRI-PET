@@ -6,7 +6,7 @@ As of yet, my lab has used statistical parametric mapping as the main analysis.
 
 <img src="http://www.ajnr.org/content/ajnr/early/2018/01/18/ajnr.A5527/F1.large.jpg" width=500> 
 
-I know there are more possibilities. I want to attempt to see what can be done to garner more attention to this radiotracer.   
+I know there are other possibilities out there. I want to attempt to see what can be done to garner more attention to this radiotracer.   
 
 At a birds-eye-view, my plans are as follows:  
 
@@ -23,7 +23,7 @@ This part I'm less excited about. Why?
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=1200> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=800> 
 
 Goals: 
 
@@ -44,7 +44,7 @@ This will hopefully ease stress of future lab members.
 
 #PROJECT 2: STRUCTURAL MRI ANALYSIS - ML. 
 
-I plan to then switch gears to machine learning on large structural MRI datasets, specifically in Alzheimer's disease populations. 
+I plan to then switch gears to machine learning on large structural MRI datasets, specifically in Alzheimer's disease populations. Soon I hope to apply ML to my lab's data, which involves Alzheimer's and Parkinson's disease subjects. 
 
 - Download PREVENT-AD and OASIS datasets
  - Feature extraction: I will stick to measures of cortical thickness, brain volume, and other basic morphology. 
