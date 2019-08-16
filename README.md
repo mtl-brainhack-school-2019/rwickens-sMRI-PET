@@ -1,8 +1,8 @@
 # STRUCTURAL MRI EXPLORATION
 
-PhD project: cholinergic brain imaging of REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Part of an ongoing Montreal RBD cohort study that tracks disease progression across time. 
+PhD project: cholinergic PET imaging of people with REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Part of an ongoing Montreal RBD cohort study that tracks disease progression across time. 
 
-My lab's particular focus is a PET radiotracer that shows great promise in quantifying brain cholinergic systems.    
+My lab's particular focus is a new PET radiotracer (FEOBV) that shows great promise in quantifying brain cholinergic systems.    
 
 As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
@@ -91,7 +91,7 @@ A Jupyter notebook walking through each of the above steps, with plots saved inl
 ### Project medium
 
 
-I will present these jupyter notebooks in a lab meeting and provide them to the lab via Github.
+I will present these jupyter notebooks in a lab meeting and provide all documents on Github.
 
 
 -------------------------------------
