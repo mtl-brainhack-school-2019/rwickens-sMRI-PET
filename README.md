@@ -23,7 +23,7 @@ This part I'm less excited about. Why?
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> width = 80
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> width=60
 
 Goals: 
 
@@ -34,7 +34,6 @@ Goals:
 
 !['Deliverable'](https://identixweb.com/wp-content/uploads/2019/02/order_delivery_date-copy-min.png)
 
-
 ###Deliverable 1:
 A Jupyter notebook with clarified pipeline instructions. 
 - Comprised of shell commands. 
@@ -42,9 +41,9 @@ A Jupyter notebook with clarified pipeline instructions.
 
 This will ease stress of future lab members and improve my own understanding. 
 
-#PROJECT 2: Machine learning on structural MRI data on large datasets of Alzheimer's disease scans.  
+#PROJECT 2: STRUCTURAL IMAGE ML ANALYSIS. 
 
-The fun part: analyzing data. 
+Machine learning on structural MRI data on large datasets of Alzheimer's disease scans.  
 
 - Download PREVENT-AD or OASIS datasets
  - Feature extraction: I will stick to stu
@@ -55,13 +54,15 @@ The fun part: analyzing data.
 -Matplotlib plots used to visualize correlation matrices / PCA, etc. 
 - Type of analysis to be determined. SVM? Random forest? 
 
+!['Deliverable'](https://identixweb.com/wp-content/uploads/2019/02/order_delivery_date-copy-min.png)
+
 ###Deliverable 2: 
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.  
 
 ---------------------------
 
-Medium: Same as deliverables + a presentation during a lab meeting. 
+Medium: Present these jupyter notebooks in a lab meeting and provide them on Github and lab Dropbox.  
 
 Summary of tools I want to learn: 
 
