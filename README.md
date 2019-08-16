@@ -77,14 +77,12 @@ If extra time allows, delve into:
     - Survival analysis / trees?
     - Cox / hazards functions?
 
-During my PhD, I hope to apply these ML techniques to my imaging analyses, and maybe become more involved in the longitudinal cohort study as well.   
-
 ### Deliverable 2
 
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
 
-A Jupyter notebook walking through each of the above steps, with plots saved inline.  
+A Jupyter notebook walking through each of the above steps, with plots saved inline.
 
 -------------
 
@@ -92,6 +90,8 @@ A Jupyter notebook walking through each of the above steps, with plots saved inl
 
 
 I will present these jupyter notebooks in a lab meeting and provide all documents on Github.
+
+During my PhD, I hope to apply these ML techniques to my PET imaging, and to get involved in the cohort study.    
 
 
 -------------------------------------
