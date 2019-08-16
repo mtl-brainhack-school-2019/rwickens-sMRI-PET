@@ -3,6 +3,7 @@ Playing with Nibabel (python) on minc files.
 Outputs stats that should be equivalent to mincstats command run on minc files.
 """
 
+import os
 import numpy as np
 import nibabel as nib
 np.set_printoptions(precision=2, suppress=True)
