@@ -1,33 +1,45 @@
 # Structural MRI
 
-#Project 1: sMRI / PET PREPROCESSING 
+My lab's focus is a PET radiotracer that has recently been validated. It characterizes the cholinergic system, which is applicable for AD, PD, etc.  
 
-- Make sense of my lab's PET pipeline. Currently, the document is confusing and not user-friendly! 
+Currently, our lab uses statistical parametric mapping as its main analysis. I would like to see what else can be done. 
 
-Exhibit A: 
+My plan has two phases: 
+
+1. Learn the current pipeline. 
+2. Gain skills and inspiration for improving my PhD project.  
+
+
+#Project 1: PREPROCESSING 
+
+(The part I'm less excited about.) 
+
+- Understand my lab's preprocessing pipeline. 
+    - The document is confusing.  
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> 
 
-- Follow these steps and successfully pre-process my laboratory's sMRI and PET (FDG/NAV tracer) data
-  - To achieve this, I need to become comfortable working with CBRAIN and CIVET
--	Run this same data thru Freesurfer and Dartel and/or ANTS
-    - This will expose me to the more popular alternative of CIVET
+- Successfully replicate my lab's pipeline 
+  - To achieve this, I need to become comfortable working with minctools, CBrain, CIVET
+-	Run this same data thru Freesurfer and Dartel and/or ANTS 
+    - This will expose me to more popular alternatives of CIVET
 - (If time allows, run data through MAGeT brain)
 
-**Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Comprised of shell commands. Briefly explains the rationale behind the processing steps. This will help all future lab members of our lab!**
+Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Comprised of shell commands. Briefly explains the rationale behind the processing steps. This will help future lab members
 
-#PROJECT 2: 
+#PROJECT 2:
+
+The fun part: playing with statistics
 
 - Download PREVENT-AD and OASIS datasets
-- Feature extraction (use of python, numpy and pandas) 
+- Feature extraction (use of python, numpy and pandas)
 - Dimensionality reduction using PCA
 - Machine learning with Nilearn 
 - Type of analysis to be determined
 
-**Deliverable: a Jupyter notebook that shows each of the above steps.** 
-
+Deliverable: a Jupyter notebook that shows each of the above steps. 
 
 ---------------------------
 
