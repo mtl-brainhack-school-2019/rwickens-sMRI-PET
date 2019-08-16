@@ -60,7 +60,7 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
-##Deliverable 2
+## Deliverable 2
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
 
