@@ -10,14 +10,14 @@ I know there are other possibilities out there. I want to attempt to see what ca
 
 At a birds-eye-view, my plans are as follows:  
 
-1. Grasp and replicate the current pipeline on my lab's past data.  
+1. Grasp the current pipeline and replicate it on previous data.  
 2. Learn about software and statistical techniques that I can implement in the lab.   
 
 ## PROJECT 1: LEARN PREPROCESSING PIPELINE 
 
-This part I'm less excited about. Why?
+This part I'm less excited about. 
 
-1. I'm here because I like analyzing data, less so preprocessing it. 
+1. I'm here because I like analyzing data, less so preprocessing it. (But, I need to get over this hump.)
 2. Minctools isn't user-friendly
 3. The instructions I've been passed down are rough. 
 
@@ -42,29 +42,33 @@ A Jupyter notebook with clarified pipeline instructions.
 
 This will hopefully ease stress of future lab members. 
 
-## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML. 
+## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML CLASSIFIER. 
 
-I plan to then switch gears to machine learning on large structural MRI datasets, specifically in Alzheimer's disease populations. Soon I hope to apply ML to my lab's data, which involves Alzheimer's and Parkinson's disease subjects. 
+I plan to then switch gears to machine learning on large structural MRI datasets of individuals with Alzheimer's disease (AD). I would like to create a classifier to determine whether scan comes from an individual with AD or a healthy control.  in Alzheimer's disease populations. Soon I hope to apply ML to my lab's data, which involves Alzheimer's and Parkinson's disease subjects. 
 
 ### Goals
 
 - Download PREVENT-AD and OASIS datasets
- - Feature extraction: I will stick to measures of cortical thickness, brain volume, and other basic morphology. 
- - Put these features into matrices using numpy and pandas
+ - Feature extraction
+    - Likely basic morphology: cortical thickness, brain volume, etc. 
+ - Put these features into workable matrices using numpy and pandas
 - Dimensionality reduction using PCA
-- I would like my analysis to predict which group the scan comes from based on these features. 
-- Machine learning with Nilearn 
-    - SVM? Random forest?
-- Learn how to perform cross-validation thanks to break-out session
-- Matplotlib plots along the way to visualize correlation matrices / PCA, etc. 
+- Enter remaining features into model
+    - Model type: SVM, random forest?  
+- Learn how to perform k-fold cross-validation thanks to break-out session
+- Nilearn to execute model  
+- Matplotlib plots along the way to visualize feature correlations, model error, etc. 
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
-## Deliverable 2
+### Deliverable 2
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.  
 
-## Medium
+### Medium
 I will present these jupyter notebooks in a lab meeting and provide them to the lab via Github.
+
+
+---------------------------------------------
