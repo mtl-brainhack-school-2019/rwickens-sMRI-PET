@@ -1,42 +1,53 @@
 # Structural MRI
 
-My lab's focus is a PET radiotracer that has recently been validated. It characterizes the cholinergic system, which is applicable for AD, PD, etc.  
+My lab's focus is a PET radiotracer that appears promising in characterizing the cholinergic system. We have tested in among several clinical populations.   
 
-Currently, our lab uses statistical parametric mapping as its main analysis. I would like to see what else can be done. 
+As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
-My plan has two phases: 
+!['T-Maps'](https://www.google.com/search?q=t-map+neuroimaging&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiqhKeqmobkAhXplOAKHQs8BC8Q_AUIESgB&biw=1280&bih=610#imgrc=hfnHbC0fztegXM:)
 
-1. Learn the current pipeline. 
-2. Gain skills and inspiration for improving my PhD project.  
+I know there are many more possibilities. I want to attempt to see what can be done to garner more attention to this radiotracer.   
 
+Abstractly, my plans have two phases: 
+
+1. Grasp and replicate the current pipeline. 
+2. Gain tools (software) and skills (statistical techniques) that I can bring back to the lab.   
 
 #Project 1: PREPROCESSING 
 
-(The part I'm less excited about.) 
+(The part I'm less excited about.)
 
-- Understand my lab's preprocessing pipeline. 
-    - The document is confusing.  
+Why? 
+(1) Minctools isn't friendly
+(2) The instructions I've received are rough
+(3) I want to play with processed data! 
+...But that would be procrastinating. 
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> 
 
+
+Goals: 
+
+- Understand my lab's preprocessing pipeline.   
 - Successfully replicate my lab's pipeline 
   - To achieve this, I need to become comfortable working with minctools, CBrain, CIVET
 -	Run this same data thru Freesurfer and Dartel and/or ANTS 
     - This will expose me to more popular alternatives of CIVET
 - (If time allows, run data through MAGeT brain)
 
-Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Comprised of shell commands. Briefly explains the rationale behind the processing steps. This will help future lab members
+Deliverable: a Jupyter notebook that improves the instruction sheet that I was given. Comprised of shell commands. Briefly explains the rationale behind the processing steps. This will ease stress of future lab members. 
 
 #PROJECT 2:
 
-The fun part: playing with statistics
+The fun part: analyzing data 
 
-- Download PREVENT-AD and OASIS datasets
-- Feature extraction (use of python, numpy and pandas)
+- Download PREVENT-AD or OASIS datasets
+ - Feature extraction (using numpy and pandas)
 - Dimensionality reduction using PCA
 - Machine learning with Nilearn 
+    - SVM? Random forest? 
 - Type of analysis to be determined
 
 Deliverable: a Jupyter notebook that shows each of the above steps. 
