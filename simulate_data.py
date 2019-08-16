@@ -52,6 +52,8 @@ parser.add_argument('--num_regions', type=int, default=64)
 parser.add_argument('--min_age', type=float, default=60.0)
 parser.add_argument('--max_age', type=float, default=80.0)
 parser.add_argument('--num_timepoints', type=int, default=3)
+parser.add_argument('--num_severe_regions', type=int, default=6)
+parser.add_argument('--severity_multiplier', type=float, default=1.5)
 args = parser.parse_args()
 
 ctp_ad = np.zeros((args.num_subjects, args.num_regions), dtype=float)
@@ -62,9 +64,16 @@ for i in np.arange(0, args.num_subjects):
     ctp_ad[i, :] = random_ctp_ad(args.num_regions)
     ctp_hc[i, :] = random_ctp_hc(args.num_regions)
 
+# Increase atrophy rate in severe regions, randomly selected
+# This will create features that can more easily differentiate between AD/HC
+if args.num_severe_regions > 0:
+    rgs = np.random.choice(np.arange(0, args.num_regions), args.num_severe_regions, replace=False)
+    ctp_ad[:, rgs] *= args.severity_multiplier
+
 TIME_STEP = 0.5
 TIMES = np.arange(args.min_age, args.max_age, TIME_STEP)
 
+# Allocate arrays for all data
 ad_ages = np.zeros(args.num_subjects)
 hc_ages = np.zeros(args.num_subjects)
 
@@ -106,7 +115,7 @@ for i in np.arange(0, args.num_subjects):
         ad_ct_long[i, 1+j, :] = estims_ad[age_ad_ti+j]
         hc_ct_long[i, 1+j, :] = estims_hc[age_hc_ti+j]
 
-# Pickle data
+# Pickle data (save Python objects to disk)
 with open("data.pkl", "ab") as f:
     pickle.dump(ad_ages, f)
     pickle.dump(ad_ct_cs, f)
@@ -114,12 +123,3 @@ with open("data.pkl", "ab") as f:
     pickle.dump(hc_ages, f)
     pickle.dump(hc_ct_cs, f)
     pickle.dump(hc_ct_long, f)
-
-# Unpickle data
-with open("data.pkl", "rb") as f:
-    ad_ages = pickle.load(f)
-    ad_ct_cs = pickle.load(f)
-    ad_ct_long = pickle.load(f)
-    hc_ages = pickle.load(f)
-    hc_ct_cs = pickle.load(f)
-    hc_ct_long = pickle.load(f)
