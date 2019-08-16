@@ -77,11 +77,9 @@ I will present these jupyter notebooks in a lab meeting and provide them to the 
 
 
 <span style="color: purple">
-
-# COMMENTS?! 
-# FEEDBACK?! 
+# COMMENTS? 
+# FEEDBACK? 
 # THANKS ! 
-
 </span>
 
 ---------------------------------------------
