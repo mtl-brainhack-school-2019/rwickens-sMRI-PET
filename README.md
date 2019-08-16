@@ -4,7 +4,7 @@ My lab's focus is a PET radiotracer that shows great promise in quantifying brai
 
 As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
-<img src="http://www.ajnr.org/content/ajnr/early/2018/01/18/ajnr.A5527/F1.large.jpg" width=300> 
+<img src="http://www.ajnr.org/content/ajnr/early/2018/01/18/ajnr.A5527/F1.large.jpg" width=500> 
 
 I know there are more possibilities. I want to attempt to see what can be done to garner more attention to this radiotracer.   
 
@@ -17,13 +17,13 @@ At a birds-eye-view, my plans are as follows:
 
 This part I'm less excited about. Why?
 
-1. I'm here because I like analyzing data, not preprocessing as much. 
+1. I'm here because I like analyzing data, less so preprocessing it. 
 2. Minctools isn't user-friendly
-3. The instructions I've gotten are rough  
+3. The instructions I've been passed down are rough. 
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=100> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=1200> 
 
 Goals: 
 
@@ -32,7 +32,7 @@ Goals:
   - To achieve this, I need to become comfortable working with minctools, CBrain, CIVET
 - (If time allows, run data through ANTS, dartel)
 
-###Deliverable 1
+##Deliverable 1
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=150> 
 
@@ -58,7 +58,7 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
-###Deliverable 2
+##Deliverable 2
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=150> 
 
