@@ -4,7 +4,7 @@ My lab's focus is a PET radiotracer that shows great promise in quantifying brai
 
 As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
-!['T-Maps'](http://www.ajnr.org/content/ajnr/early/2018/01/18/ajnr.A5527/F1.large.jpg)
+<img src="http://www.ajnr.org/content/ajnr/early/2018/01/18/ajnr.A5527/F1.large.jpg" width=300> 
 
 I know there are more possibilities. I want to attempt to see what can be done to garner more attention to this radiotracer.   
 
