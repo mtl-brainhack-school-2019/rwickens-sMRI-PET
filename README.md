@@ -57,7 +57,7 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 
 ### Goals
 
-- Download PREVENT-AD and OASIS datasets
+- Download a subset of the PREVENT-AD or OASIS datasets
  - Feature extraction
     - Basic morphology: cortical thickness, brain volume, etc. 
  - Put these features into workable matrices using numpy and pandas
