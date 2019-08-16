@@ -1,6 +1,8 @@
 # STRUCTURAL MRI EXPLORATION
 
-My lab's focus is a PET radiotracer that shows great promise in quantifying brain cholinergic systems. We are interested in applying this technique for imaging neurodegenerative conditions. 
+PhD project: cholinergic brain imaging of REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Part of a longer cohort study that collects clinical data across time. 
+
+My lab's focus is a PET radiotracer that shows great promise in quantifying brain cholinergic systems. We are interested in applying this technique for imaging neurodegenerative conditions.   
 
 As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
@@ -11,7 +13,7 @@ I know there are other possibilities out there. I want to attempt to see what ca
 At a birds-eye-view, I have two intentions:  
 
 1. Grasp the current pipeline and replicate it on existing data.  
-2. Learn about software and statistical techniques that I can implement in the lab.   
+2. Learn about software and statistical techniques that I can implement in the lab and bring to the longitudinal study.    
 
 -----------------------
 
@@ -69,8 +71,7 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 If extra time allows, look into: 
 
 - Longitudinal data? 
-- Model to predict time of disease conversion?
-- Naive bayes classifier? 
+- Model to predict onset of disease conversion?
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
