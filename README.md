@@ -23,7 +23,7 @@ This part I'm less excited about. Why?
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=60> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=100> 
 
 Goals: 
 
@@ -50,10 +50,11 @@ I plan to then switch gears to machine learning on large structural MRI datasets
  - Feature extraction: I will stick to measures of cortical thickness, brain volume, and other basic morphology. 
  - Put these features into matrices using numpy and pandas
 - Dimensionality reduction using PCA
+- I would like my analysis to predict which group the scan comes from based on these features. 
 - Machine learning with Nilearn 
     - SVM? Random forest?
 - Learn how to perform cross-validation thanks to break-out session
--Matplotlib plots along the way to visualize correlation matrices / PCA, etc. 
+- Matplotlib plots along the way to visualize correlation matrices / PCA, etc. 
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
