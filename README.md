@@ -25,7 +25,7 @@ This part I'm less excited about. Why?
 - Minctools isn't user-friendly
 - The instructions I've been passed down are a little rough. 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1000> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=850> 
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=350> 
 
