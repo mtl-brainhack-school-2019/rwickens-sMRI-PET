@@ -1,8 +1,8 @@
 # Structural MRI
 
-My lab's focus is a PET radiotracer that is promising in imaging the cholinergic system. 
+My lab's focus is a PET radiotracer that shows great promise in quantifying brain acetylcholine.  
 
-As of yet, my lab has used statistical parametric mapping as the main analysis. 
+As of uet, my lab has used statistical parametric mapping as the main analysis. 
 
 !['T-Maps'](http://www.ajnr.org/content/ajnr/early/2018/01/18/ajnr.A5527/F1.large.jpg)
 
@@ -17,13 +17,13 @@ Abstractly, my plans have two phases:
 
 This part I'm less excited about. Why?
 
-(1) I'm here because I like analyzing data, not because of pre-processing.
+(1) I'm here because I like analyzing data, not because of pre-processing!
 (2) Minctools isn't user-friendly
 (3) The instructions I've gotten are rough  
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> width=60
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg"> width=40
 
 Goals: 
 
@@ -32,29 +32,31 @@ Goals:
   - To achieve this, I need to become comfortable working with minctools, CBrain, CIVET
 - (If time allows, run data through ANTS, dartel)
 
-!['Deliverable'](https://identixweb.com/wp-content/uploads/2019/02/order_delivery_date-copy-min.png)
+!['Deliverable'](data:image/png;base64,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)
 
 ###Deliverable 1:
 A Jupyter notebook with clarified pipeline instructions. 
-- Comprised of shell commands. 
+- Involves bash commands. 
 - Briefly explains the rationale behind the processing steps. 
 
-This will ease stress of future lab members and improve my own understanding. 
+This will hopefully ease stress of future lab members. 
 
 #PROJECT 2: STRUCTURAL IMAGE ML ANALYSIS. 
 
-Machine learning on structural MRI data on large datasets of Alzheimer's disease scans.  
+After preprocessing, I plan to switch gears to machine learning on large structural MRI datasets, specifically in Alzheimer's disease populations. 
 
 - Download PREVENT-AD or OASIS datasets
- - Feature extraction: I will stick to stu
- -  (using numpy and pandas)
+ - Feature extraction: I will stick to measures of cortical thickness, brain volume, and other basic morphology. 
+ - Put these features into matrices using numpy and pandas
 - Dimensionality reduction using PCA
 - Machine learning with Nilearn 
     - SVM? Random forest?
--Matplotlib plots used to visualize correlation matrices / PCA, etc. 
+-Matplotlib plots along the way to visualize correlation matrices / PCA, etc. 
 - Type of analysis to be determined. SVM? Random forest? 
 
-!['Deliverable'](https://identixweb.com/wp-content/uploads/2019/02/order_delivery_date-copy-min.png)
+!['Random forest'](https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg)
+
+!['Deliverable'](data:image/png;base64,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)
 
 ###Deliverable 2: 
 
