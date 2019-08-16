@@ -23,11 +23,9 @@ This part I'm less excited about.
 2. Minctools isn't user-friendly
 3. The instructions I've been passed down are rough. 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1200> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1000> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=500> 
-
-Okay, there are some bash commands along with these instructions. But it's still not very clear. 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=400> 
 
 ### Goals
 
@@ -49,7 +47,7 @@ This will hopefully ease stress of future lab members.
 
 In the future, I would like to write a script to automate our lab's preprocessing.
 
--------------
+-----------------------
 
 ## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML CLASSIFIER. 
 
@@ -79,8 +77,7 @@ A Jupyter notebook walking through each of the above steps, with plots saved inl
 
 -------------
 
-### Medium
-
+### Project medium
 
 
 I will present these jupyter notebooks in a lab meeting and provide them to the lab via Github.
