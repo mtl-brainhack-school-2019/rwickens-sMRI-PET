@@ -75,7 +75,13 @@ A Jupyter notebook walking through each of the above steps, with plots saved inl
 ### Medium
 I will present these jupyter notebooks in a lab meeting and provide them to the lab via Github.
 
-# COMMENTS?! FEEDBACK?! 
-# THANKS !
+
+<span style="color: purple">
+
+# COMMENTS?! 
+# FEEDBACK?! 
+# THANKS ! 
+
+</span>
 
 ---------------------------------------------
