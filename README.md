@@ -8,24 +8,24 @@ As of yet, my lab has used statistical parametric mapping as the main analysis.
 
 I know there are other possibilities out there. I want to attempt to see what can be done to garner more attention to this radiotracer.   
 
-At a birds-eye-view, my plans are as follows:  
+At a birds-eye-view, I have two intentions:  
 
-1. Grasp the current pipeline and replicate it on previous data.  
+1. Grasp the current pipeline and replicate it on existing data.  
 2. Learn about software and statistical techniques that I can implement in the lab.   
 
 -----------------------
 
 ## PROJECT 1: LEARN PREPROCESSING PIPELINE 
 
-This part I'm less excited about. 
+This part I'm less excited about. Why?  
 
-1. I'm here because I like analyzing data, less so preprocessing it. (But, I need to get over this hump.)
+1. I'm at BrainHack because I like analyzing data, less so preprocessing it. (But, I need to get over this hump.)
 2. Minctools isn't user-friendly
-3. The instructions I've been passed down are rough. 
+3. The instructions I've been passed down are a little rough. 
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=1000> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=400> 
+<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=350> 
 
 ### Goals
 
@@ -63,8 +63,13 @@ I plan to then switch gears to machine learning on large structural MRI datasets
 - Enter remaining features into model
     - Model type: SVM, random forest?  
 - Learn about cross-validation techniques thanks to break-out session
-- Nilearn to analyse the model and perform validation  
-- Matplotlib plots along the way to visualize correlation matrices, model error, etc. 
+- Nilearn to implement the above  
+- Matplotlib plots along the way to visualize correlation matrices, model error, ROC curve, etc.
+
+If extra time allows: 
+
+- Longitudinal data? 
+- Model to predict time of disease conversion 
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
@@ -84,7 +89,6 @@ I will present these jupyter notebooks in a lab meeting and provide them to the 
 
 
 -------------------------------------
-
 
 # COMMENTS? 
 # FEEDBACK? 
