@@ -1,6 +1,6 @@
 # STRUCTURAL MRI EXPLORATION
 
-My lab's focus is a PET radiotracer that shows great promise in quantifying brain acetylcholine.  
+My lab's focus is a PET radiotracer that shows great promise in quantifying brain acetylcholine. We are interested in applying this technique for imaging neurodegenerative conditions. 
 
 As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
@@ -25,11 +25,13 @@ This part I'm less excited about.
 
 <img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=500> 
 
+Okay, there are some bash commands along with these instructions. But it's still not very clear. 
+
 ### Goals
 
 - Understand my lab's preprocessing pipeline.   
 - Successfully replicate it. 
-  - To achieve this, I need to become comfortable working with minctools, CBrain, CIVET
+  - Become comfortable working with minctools, CBrain, CIVET
 - (If time allows, run data through ANTS, dartel)
 
 ### Deliverable 1
@@ -37,29 +39,30 @@ This part I'm less excited about.
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
 
 A Jupyter notebook with clarified pipeline instructions. 
-- Involves bash commands. 
-- Briefly explains the rationale behind the processing steps. 
+- Code will be in bash
+- Will contain more comments
+- Will briefly explain the rationale behind the processing steps, with particular attention to order.  
 
 This will hopefully ease stress of future lab members. 
 
-In the future, I would like to write a script to automate these preprocessing steps.  
+In the future, I would like to write a script to automate our lab's preprocessing.   
 
 ## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML CLASSIFIER. 
 
-I plan to then switch gears to machine learning on large structural MRI datasets of individuals with Alzheimer's disease (AD). I would like to create a classifier to determine whether scan comes from an individual with AD or a healthy control.  in Alzheimer's disease populations. Soon I hope to apply ML to my lab's data, which involves Alzheimer's and Parkinson's disease subjects. 
+I plan to then switch gears to machine learning on large structural MRI datasets of individuals with Alzheimer's disease (AD). I would like to create a classifier to determine whether scan comes from an individual with AD or a healthy control. Soon I hope to apply ML to my lab's data, which involves Alzheimer's and Parkinson's disease subjects. 
 
 ### Goals
 
 - Download PREVENT-AD and OASIS datasets
  - Feature extraction
-    - Likely basic morphology: cortical thickness, brain volume, etc. 
+    - Basic morphology: cortical thickness, brain volume, etc. 
  - Put these features into workable matrices using numpy and pandas
 - Dimensionality reduction using PCA
 - Enter remaining features into model
     - Model type: SVM, random forest?  
-- Learn how to perform k-fold cross-validation thanks to break-out session
-- Nilearn to execute model  
-- Matplotlib plots along the way to visualize feature correlations, model error, etc. 
+- Learn about cross-validation techniques thanks to break-out session
+- Nilearn to analyse the model and perform validation  
+- Matplotlib plots along the way to visualize correlation matrices, model error, etc. 
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500> 
 
