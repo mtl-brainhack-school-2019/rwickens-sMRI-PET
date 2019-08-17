@@ -47,7 +47,7 @@ This part I'm less excited about. Why?
 
 This will hopefully ease stress of future lab members. 
 
-Someday, I will write a script that automates these steps, eliminating the need for the jupyter script I will create. 
+Someday, I will write a script that automates these steps, eliminating the need for the above jupyter file.  
 
 -----------------------
 
@@ -61,12 +61,12 @@ I plan to then switch gears to machine learning on large structural MRI datasets
  - Feature extraction
     - Basic morphology: cortical thickness, brain volume, etc. 
  - Put these features into workable matrices using numpy and pandas
-- Dimensionality reduction using PCA
+- Dimensionality reduction via PCA
 - Enter remaining features into model
     - Model type: SVM, random forest?  
 - Learn about cross-validation techniques thanks to break-out session
 - Nilearn to implement the above  
-- Matplotlib plots along the way to visualize correlation matrices, model error, ROC curve, etc.
+- Matplotlib plots along the way to visualize correlation matrices, model error, ROC curves, etc.
 
 <img src="https://www.fromthegenesis.com/wp-content/uploads/2018/06/Random-Forest.jpg" width=500>
 
@@ -76,6 +76,7 @@ If extra time allows, delve into:
 - Model to predict onset of disease conversion
     - Survival analysis?
     - Cox hazards functions?
+- The project head plans on using naive bayes classifiers to determine risk of Parkinson's disease. I would like to learn what this is. 
 
 ### Deliverable 2
 
