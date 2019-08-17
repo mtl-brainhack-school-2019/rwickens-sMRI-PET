@@ -6,7 +6,7 @@ My lab's particular focus is a new PET radiotracer (FEOBV) that shows great prom
 
 As of yet, my lab has used statistical parametric mapping as the main analysis. 
 
-<img src="http://www.ajnr.org/content/ajnr/early/2018/01/18/ajnr.A5527/F1.large.jpg" width=500> 
+<img src="https://github.com/rwickens/TestRepo/blob/master/FEOBV.jpg?raw=true" width=500> 
 
 I know there are other possibilities out there. I want to attempt to see what can be done to garner more attention to this radiotracer.   
 
@@ -29,6 +29,7 @@ This part I'm less excited about. Why?
 
 <img src="https://github.com/rwickens/TestRepo/blob/master/Img2.jpg?raw=true" width=350> 
 
+
 ### Goals
 
 1. Understand my lab's preprocessing pipeline.   
@@ -47,13 +48,13 @@ This part I'm less excited about. Why?
 
 This will hopefully ease stress of future lab members. 
 
-Someday, I will write a script that automates these steps, eliminating the need for the above jupyter file.  
+In the future, I hope to write a script that automates these steps, eliminating the need for the above jupyter file.  
 
 -----------------------
 
 ## PROJECT 2: STRUCTURAL MRI ANALYSIS - ML CLASSIFIER. 
 
-I plan to then switch gears to machine learning on large structural MRI datasets of individuals with Alzheimer's disease (AD). I would like to create a classifier to determine whether scan comes from an individual with AD or a healthy control. 
+I plan to then switch gears to machine learning on structural MRI data of individuals with Alzheimer's disease (AD). I would like to create a classifier to determine whether scan comes from an individual with AD or a healthy control. 
 
 ### Goals
 
@@ -82,6 +83,7 @@ If extra time allows, delve into:
 
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=100> 
+Source: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.
 
