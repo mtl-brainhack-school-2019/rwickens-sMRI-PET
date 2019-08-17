@@ -74,9 +74,9 @@ If extra time allows, delve into:
 
 - Longitudinal data 
 - Model to predict onset of disease conversion
+    - Naive bayes classifiers? 
     - Survival analysis?
-    - Cox hazards functions?
-- The project head plans on using naive bayes classifiers to determine risk of Parkinson's disease. I would like to learn what this is. 
+    - Cox hazards functions? 
 
 ### Deliverable 2
 
@@ -93,7 +93,6 @@ A Jupyter notebook walking through each of the above steps, with plots saved inl
 I will present these jupyter notebooks in a lab meeting and provide all documents on Github.
 
 During my PhD, I hope to apply these ML techniques to my PET imaging, and to get involved in the cohort study.    
-
 
 -------------------------------------
 
