@@ -1,6 +1,6 @@
 # STRUCTURAL MRI EXPLORATION
 
-PhD project: cholinergic PET imaging of people with REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Part of an ongoing Montreal RBD cohort study that tracks disease progression across time. 
+PhD project: cholinergic PET imaging of people with REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Taking place at the Montreal Neurological Institute. Part of the ongoing Montreal RBD cohort study that tracks disease progression across time. 
 
 My lab's particular focus is a new PET radiotracer (FEOBV) that shows great promise in quantifying brain cholinergic systems.    
 
@@ -25,9 +25,9 @@ This part I'm less excited about. Why?
 - Minctools isn't user-friendly
 - The instructions I've been passed down are a little rough. 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/Wtf.PNG?raw=true" width=800> 
+<img src="https://github.com/rwickens/TestRepo/blob/master/Img1.PNG?raw=true" width=800> 
 
-<img src="https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET/blob/master/JackieChan.jpg" width=350> 
+<img src="https://github.com/rwickens/TestRepo/blob/master/Img2.jpg?raw=true" width=350> 
 
 ### Goals
 
@@ -74,8 +74,8 @@ If extra time allows, delve into:
 
 - Longitudinal data 
 - Model to predict onset of disease conversion
-    - Survival analysis / trees?
-    - Cox / hazards functions?
+    - Survival analysis?
+    - Cox hazards functions?
 
 ### Deliverable 2
 
