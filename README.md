@@ -38,7 +38,7 @@ This part I'm less excited about. Why?
 
 ### Deliverable 1
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=100> 
 
 - A Jupyter notebook with clarified pipeline instructions. 
     - Code will be in bash
@@ -81,7 +81,7 @@ If extra time allows, delve into:
 ### Deliverable 2
 
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=200> 
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=100> 
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.
 
