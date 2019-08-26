@@ -2,10 +2,8 @@ import numpy as np
 import pickle
 import argparse
 
-
 def get_age_index(age, times):
     return np.where(times == age)
-
 
 def random_ct(count=1):
     set = np.arange(2.7, 3.98, 0.01, dtype=float)

@@ -83,7 +83,6 @@ If extra time allows, delve into:
 
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=100> 
-Source: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62
 
 A Jupyter notebook walking through each of the above steps, with plots saved inline.
 
