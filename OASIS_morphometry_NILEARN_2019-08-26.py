@@ -2,17 +2,18 @@
 # coding: utf-8
 
 """
+
 This jupyter notebook includes code taken from the nilearn project, 
 "Voxel-Based Morphometry on Oasis dataset", which predicts age from
 grey matter morhpometry. Feature redux = k-best ANOVA, prediction function = SVM. 
 
 I am tweaking the code to add the following:  
 Train_test_split
-k-fold validation
 Feature redux = PCA, prediction function = SVM. 
 Inverse image to show the voxels corresponding to support vector weights
 Other cool prediction models I could use for continuous data : (ideas here)
 Various plots. 
+Eventually add k-fold validation
 
 """
 
@@ -56,7 +57,8 @@ nifti_masker = NiftiMasker(
     memory='nilearn_cache')  # cache options
 
 gm_maps_masked_nondisk = nifti_masker.fit_transform(gray_matter_map_filenames)
-age_nondisk = oasis_dataset.ext_vars['age'].astype(float)
+age_nondisk = oasis_dataset.ext_vars['age', None].astype(float)
+#Ask Greg about this
 
 #Save grey matter array onto disk
 np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy", gm_maps_masked_nondisk)
@@ -83,7 +85,7 @@ n_samples, n_features = gm_maps_masked.shape
 print(age.shape)
 print("%d samples, %d features" % (n_samples, n_features))
 
-# np.amax(gm_maps_masked)
+# print(np.amax(gm_maps_masked))
 #Hm. I wonder what units this is in. I was under the impression
 #that tissue values represent probability, which should be between 0 and 1.
 
@@ -92,7 +94,7 @@ plt.hist(gm_maps_masked, bins=10)
 plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/ournewdistributionfigure.png")
 plt.show()
 
-np.amin(gm_maps_masked)
+#print(np.amin(gm_maps_masked))
 #A minimum of 0 is good. 
 
 #Now, here is my larger model (dimension reduction and prediction models) 
@@ -126,7 +128,9 @@ plt.plot(np.cumsum(pca.explained_variance_ratio_))
 plt.xlabel('Number of Components')
 plt.ylabel('Variance (%)') #for each component
 plt.title('PCA - Oasis Grey Matter Explained Variance')
+plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/cumulative_sum.png")
 plt.show()
+
 
 #Create a pandas dataframe with the loadings for each component
 df = pd.DataFrame(GMtrain_compressed)
@@ -134,8 +138,8 @@ print(df)
 
 #Creating a plot showing variance explained by first 20 components. 
 
-len(pca.explained_variance_ratio_) #should be 100, or whatever set to
-type(pca.explained_variance_ratio_) #should be numpy array
+print(len(pca.explained_variance_ratio_)) #should be 100, or whatever set to
+print(type(pca.explained_variance_ratio_)) #should be numpy array
 shortened_components = pca.explained_variance_ratio_[:20] #will this get the first 20 items of the array...
 
 mylist = []
@@ -148,6 +152,7 @@ df = pd.DataFrame({'var':shortened_components,
              'PC':mylist})
 sns.barplot(x='PC',y="var", 
            data=df, color="c")
+plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/barplot.png")
 
 pipe = Pipeline([
     ('PCA', PCA(random_state=123)), 
@@ -156,7 +161,7 @@ pipe = Pipeline([
 pipefit = pipe.fit(GMtrain, age_train)
 type(pipefit) #just curious what this would return as type  
 age_pred_reb = pipe.predict(GMtest)
-type(age_pred_reb) #I'm guessing this will be an array of predicted y value
+print(type(age_pred_reb)) #I'm guessing this will be an array of predicted y values
 
 """
 if (len(age)==len(age_pred_reb)):
@@ -185,30 +190,35 @@ print("=== SVM ===")
 print("Prediction accuracy: %f" % prediction_accuracy)
 print("")
 
-# getting the weights of the linear svr 
+# retrieving the coefficients, or weights, of the linear svr 
 coef = svr.coef_
+
 # reverse feature selection
 coef = pca.inverse_transform(coef)
 print(coef) #just curious what this outputs
 
 # reverse masking
 weight_img = nifti_masker.inverse_transform(coef)
+print(type(weight_img)) #Curious, I expect this to be a two-dimensional array (voxel & weight)
 
 # Create the figure based on the first subject's scan
 bg_filename = oasis_dataset.gray_matter_maps[0]
-z_slice = 0
+z_slice = 0 #Horizontal slice of the brain
 
 fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
 
-# Hard setting vmax to highlight weights more (meaning???)
+# Hard setting vmax to highlight weights more - in other words, normalizing
 display = plot_stat_map(weight_img, bg_img=bg_filename,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig, vmax=1)
 display.title('SVM weights', y=1.2)
+plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/svm_inverse.png")
 
-print("reached the end of the program; if plots have not been made you should worry")
+
+print("reached the end of the PCA-SVM program; if plots have not been made you should worry")
+
 #------------------------------------------------
-"""
+
 print("ANOVA + SVR")
 # Define the prediction function to be used.
 # Here we use a Support Vector Classification, with a linear kernel
@@ -216,7 +226,7 @@ from sklearn.svm import SVR
 svr = SVR(kernel="linear")
 
 # Dimension reduction
-from sklearn.feature_selection import VarianceThreshold, SelectKBest,         f_regression
+from sklearn.feature_selection import VarianceThreshold, SelectKBest, f_regression
 
 # Remove features with too low between-subject variance
 variance_threshold = VarianceThreshold(threshold=.01)
@@ -296,5 +306,5 @@ display.title(title, y=1.2)
 n_detections = (signed_neg_log_pvals_unmasked.get_data() > threshold).sum()
 print("%d detections" % n_detections)
 
+#savefig here
 show()
-""" 
