@@ -10,19 +10,20 @@ I am tweaking the code to add the following:
 Train_test_split
 k-fold validation
 Feature redux = PCA, prediction function = SVM. 
-Inverse image to show the voxels corresponding to support vector machine
-Other cool prediction models I could use for continuous data : 
+Inverse image to show the voxels corresponding to support vector weights
+Other cool prediction models I could use for continuous data : (ideas here)
 Various plots. 
 
 """
 
 # Let's keep our notebook clean, so it's a little more readable!
 import warnings
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 
 #All imports
 from nilearn import datasets
 from nilearn import plotting
+from nilearn.plotting import plot_stat_map, show
 import os
 import numpy as np
 import pandas as pd
@@ -33,18 +34,19 @@ from nilearn.input_data import NiftiMasker
 import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVR
 from sklearn.decomposition import PCA
 #from sklearn.preprocessing import MinMaxScaler
 from sklearn.pipeline import Pipeline
 
-"""
 #Only run this commented part once! The outputs are saved to disk. 
 oasis_dataset = datasets.fetch_oasis_vbm() #Selected all 403 subjects
 
 #Let's plot the first subject's neuroimage for fun. 
 subject1 = oasis_dataset.gray_matter_maps[0]
 plotting.view_img(subject1)
+#save this image somewhere
 
 gray_matter_map_filenames = oasis_dataset.gray_matter_maps
 
@@ -69,7 +71,6 @@ np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/ages.npy", age_nondis
 #wm_maps_nondisk = nifti_masker.fit_transform(white_matter_map_filenames)
 #Save white matter onto disk
 #np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/white_matter.npy", white_matter_nondisk)
-"""
 
 #load grey matter array (x-variables) array from disk
 gm_maps_masked = np.load("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy")
@@ -88,7 +89,7 @@ print("%d samples, %d features" % (n_samples, n_features))
 
 # I have an idea! Let's plot the distribution to see if this looks like a probability or not
 plt.hist(gm_maps_masked, bins=10)
-plt.savefig("C:Users/rwick/Documents/GitHub/rwickens-sMRI-PET/ournewdistributionfigure.png")
+plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/ournewdistributionfigure.png")
 plt.show()
 
 np.amin(gm_maps_masked)
@@ -157,19 +158,22 @@ type(pipefit) #just curious what this would return as type
 age_pred_reb = pipe.predict(GMtest)
 type(age_pred_reb) #I'm guessing this will be an array of predicted y value
 
+"""
 if (len(age)==len(age_pred_reb)):
     #compute ordinary least squares here to get model accuracy
-    
+else:
+    print("cannot compute residuals because of different array size!")
+"""    
+
 # Measure accuracy with cross-validation
 # This is to test the fit of the training data ONLY! 
-from sklearn.model_selection import cross_val_score
 cv_scores_train = cross_val_score(pipe, GMtrain, age_train)
 print("The accuracy of the training svm model in predicting training data is %a" % cv_scores_train)
 
 # Measure accuracy with cross validation
 # Running cross-validation on TEST DATA - the interesting part! 
 cv_scores_test = cross_val_score(pipe, GMtest, age_test)
-print("The accuracy of the training svm model in predicting test data is %b" % test)
+print("The accuracy of the training svm model in predicting test data is %d" % cv_scores_test)
 
 difference = (cv_scores_train - cv_scores_test)
 
@@ -181,51 +185,35 @@ print("=== SVM ===")
 print("Prediction accuracy: %f" % prediction_accuracy)
 print("")
 
+# getting the weights of the linear svr 
 coef = svr.coef_
 # reverse feature selection
-coef = feature_selection.inverse_transform(coef)
-# reverse variance threshold
-coef = variance_threshold.inverse_transform(coef)
+coef = pca.inverse_transform(coef)
+print(coef) #just curious what this outputs
+
 # reverse masking
 weight_img = nifti_masker.inverse_transform(coef)
 
-# Create the figure
-from nilearn.plotting import plot_stat_map, show
-bg_filename = gray_matter_map_filenames[0]
+# Create the figure based on the first subject's scan
+bg_filename = oasis_dataset.gray_matter_maps[0]
 z_slice = 0
 
 fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
-# Hard setting vmax to highlight weights more
+
+# Hard setting vmax to highlight weights more (meaning???)
 display = plot_stat_map(weight_img, bg_img=bg_filename,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig, vmax=1)
 display.title('SVM weights', y=1.2)
 
-
+print("reached the end of the program; if plots have not been made you should worry")
 #------------------------------------------------
-#I will implement k-fold cross-validation later
-
-"""
-Model code
-
-scores = []
-best_svr = SVR(kernel='linear')
-cv = KFold(n_splits=10, random_state=42, shuffle=False)
-for train_index, test_index in cv.split(X):
-    print("Train Index: ", train_index, "\n")
-    print("Test Index: ", test_index)
-
-    X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
-    best_svr.fit(X_train, y_train)
-    scores.append(best_svr.score(X_test, y_test))
-"""
-
 """
 print("ANOVA + SVR")
 # Define the prediction function to be used.
 # Here we use a Support Vector Classification, with a linear kernel
 from sklearn.svm import SVR
-svr = SVR(kernel='linear')
+svr = SVR(kernel="linear")
 
 # Dimension reduction
 from sklearn.feature_selection import VarianceThreshold, SelectKBest,         f_regression
@@ -268,7 +256,7 @@ fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
 display = plot_stat_map(weight_img, bg_img=bg_filename,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig, vmax=1)
-display.title('SVM weights', y=1.2)
+display.title("SVM weights", y=1.2)
 
 # Measure accuracy with cross validation
 from sklearn.model_selection import cross_val_score
@@ -301,25 +289,12 @@ display = plot_stat_map(signed_neg_log_pvals_unmasked, bg_img=bg_filename,
                         threshold=threshold, cmap=plt.cm.RdBu_r,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig)
-title = ('Negative $\log_{10}$ p-values'
-         '\n(Non-parametric + max-type correction)')
+title = ("Negative $log_{10}$ p-values"
+         "(Non-parametric + max-type correction)")
 display.title(title, y=1.2)
 
 n_detections = (signed_neg_log_pvals_unmasked.get_data() > threshold).sum()
-print('\n%d detections' % n_detections)
+print("%d detections" % n_detections)
 
 show()
-"""
-"""
-type(gm_maps_masked)
-type(age)
-type(GMtrain)
-type(GMtest)
-
-print(gm_maps_masked.shape)
-print(GMtrain.shape)
-print(GMtest.shape)
-print(age.shape)
-print(age_train.shape)
-print(age_test.shape)
-"""
+""" 
