@@ -1,6 +1,33 @@
+"""
+Using synthetic data graciously created by Joshua Morse, I am attempting to create one or more
+classifiers to predict group diagnosis - Alzheimer's disease (1) versus healthy control (0)
+
+Ideas for classifiers to explore:
+- (Gaussian) naive bayes 
+- Logistic regression 
+- Discriminant function analysis
+- Random forest 
+
+Goals: 
+- Plot distributions of predictor variables 
+- Create ROCs
+"""
+
 import pickle
-import numpy
+import numpy as np
 import pandas as pd
+import sklearn
+from sklearn import metrics
+from sklearn.model_selection import train_test_split
+#from sklearn.model_selection import KFold
+#from sklearn.model_selection import cross_val_score # possibly for continuous data only
+from sklearn.naive_bayes import GaussianNB
+import scipy.stats as stats
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+
+
+# GETTING X AND Y VARIABLES READY ##################
 
 with open("data.pkl", "rb") as f:
     ad_ages = pickle.load(f) #ages AD
@@ -31,15 +58,45 @@ print(hc_df.shape)
 
 #data.to_csv(r'C:\Users\rwick\Documents\GitHubNew\rwickens-sMRI-PET\cortical_data.csv')
 
-#Note to self: 
-#indices 0 to 999 are AD 
-#indices 1000 to 1999 are HC
+#Note to self: indices 0-999 are AD; indices 1000 to 1999 are HC
 
 ages = data['age']
-print(ages)
+#print(ages)
 
 diagnosis = data['AD']
-print(diagnosis)
+#print(diagnosis)
 
-thickness = data[0:-1]
-print(thickness)
+thickness = data.iloc[:,0:-2]
+#print(thickness)
+
+predictors = data.iloc[:,0:-1]
+
+#####################
+
+# split the data into train and test sets (75/25), also indicate stratification of diagnosis
+xtrain, xtest, ytrain, ytest = train_test_split(predictors, diagnosis, stratify = diagnosis, random_state=1)
+
+#check underlying assumption before running Gaussian naive bayes classifier 
+
+# turn each column of test DF into numpy array
+# cycle through and run stats.ktest(x[i], 'norm')
+# append results into some list with printed index
+# if the proportion of significant results is > than my alpha level (0.05), I'll ask for advice 
+ 
+# x = numpy array
+# stats.kstest(x, 'norm')
+
+#from sklearn.naive_bayes import GaussianNB
+model = GaussianNB()
+model.fit(xtrain, ytrain)
+ytest = model.predict(xtest)
+yprob_test = model.predict_proba(xtest)
+
+
+
+
+
+
+
+
+
