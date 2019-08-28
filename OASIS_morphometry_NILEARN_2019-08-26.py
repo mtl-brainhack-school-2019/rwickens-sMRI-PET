@@ -9,11 +9,20 @@ grey matter morhpometry. Feature redux = k-best ANOVA, prediction function = SVM
 
 I am tweaking the code to add the following:  
 Train_test_split
-Feature redux = PCA, prediction function = SVM. 
+Feature redux = PCA, prediction function = SVM.
 Inverse image to show the voxels corresponding to support vector weights
-Other cool prediction models I could use for continuous data : (ideas here)
-Various plots. 
+Various plots
+
 Eventually add k-fold validation
+Try radial basis function support vector regressor? 
+C and epsilon terms...
+
+PCA appears to improve the model compared to the ANOVA for feature selection. 
+
+To-do list: 
+- Save oasis dataset as an object on computer; load  
+- Why are your figures not showing up and not saving? 
+- Difference between plt.show() versus just show()
 
 """
 
@@ -41,7 +50,9 @@ from sklearn.decomposition import PCA
 #from sklearn.preprocessing import MinMaxScaler
 from sklearn.pipeline import Pipeline
 
-#Only run this commented part once! The outputs are saved to disk. 
+"""
+#**********************************************************************
+#*Only run this chunk of code once to download arrays to disk! 
 oasis_dataset = datasets.fetch_oasis_vbm() #Selected all 403 subjects
 
 #Let's plot the first subject's neuroimage for fun. 
@@ -57,8 +68,7 @@ nifti_masker = NiftiMasker(
     memory='nilearn_cache')  # cache options
 
 gm_maps_masked_nondisk = nifti_masker.fit_transform(gray_matter_map_filenames)
-age_nondisk = oasis_dataset.ext_vars['age', None].astype(float)
-#Ask Greg about this
+age_nondisk = oasis_dataset.ext_vars['age'].astype(float)
 
 #Save grey matter array onto disk
 np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy", gm_maps_masked_nondisk)
@@ -66,35 +76,30 @@ np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy", gm_maps_m
 #Save age (our y-variable) array onto disk 
 np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/ages.npy", age_nondisk)
 
-#For now, I'm only looking at grey matter. But here's some code to extract white 
-#matter in case I decide to later. Note to self: make sure the nifti masker is
-#adapted for white matter, with correct fwhm
-#white_matter_map_filenames = oasis_dataset.white_matter_maps
-#wm_maps_nondisk = nifti_masker.fit_transform(white_matter_map_filenames)
-#Save white matter onto disk
-#np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/white_matter.npy", white_matter_nondisk)
+#Only run this chunk of code once to download arrays to disk! 
+#*****************************************************
+"""
+
 
 #load grey matter array (x-variables) array from disk
 gm_maps_masked = np.load("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy")
 #Load age array (y-variable) from disk
 age = np.load("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/ages.npy")
-#Load white matter array (additional x-variables) from disk
-#white_matter_masked = np.load("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/white_matter.npy")
 
 n_samples, n_features = gm_maps_masked.shape
 print(age.shape)
 print("%d samples, %d features" % (n_samples, n_features))
 
-# print(np.amax(gm_maps_masked))
+print(np.amax(gm_maps_masked))
 #Hm. I wonder what units this is in. I was under the impression
 #that tissue values represent probability, which should be between 0 and 1.
 
-# I have an idea! Let's plot the distribution to see if this looks like a probability or not
+# Let's plot the distribution to see if this looks like a probability or not
 plt.hist(gm_maps_masked, bins=10)
 plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/ournewdistributionfigure.png")
 plt.show()
 
-#print(np.amin(gm_maps_masked))
+print(np.amin(gm_maps_masked))
 #A minimum of 0 is good. 
 
 #Now, here is my larger model (dimension reduction and prediction models) 
@@ -106,31 +111,32 @@ GMtrain, GMtest, age_train, age_test = train_test_split(gm_maps_masked, age, ran
 # Here we use a Support Vector Classification, with a linear kernel
 svr = SVR(kernel='linear')
 
-# Dimension reduction - PCA
+# Dimension reduction - using a PCA with the first 100 components
+# Making sure to run this PCA on training set only 
+# Then applying same eigenvectors to the test set 
 
 pca = PCA(n_components=100)
 GMtrain_compressed = pca.fit_transform(GMtrain) # Fit the data for the training set 
 GMtest_compressed = pca.transform(GMtest) # Fit the data for the test set
+
+# Notes to self: 
+# Fit_transform should take care of scaling. 
+# Fit runs the PCA onto a particular dataset. Transform applies that dimensionality 
+# reduction onto a different dataset.  
 
 #Some checks to see if the number of components makes sense
 print("shape of gm_maps_masked is %f" % gm_maps_masked.shape)
 print("shape of GMtrain_compressed is %g" % GMtrain_compressed.shape)
 print("shape of GMtest_compressed is %r" % GMtest_compressed.shape)
 
-# Notes to self: 
-# Fit_transform should takes care of scaling. 
-# Fit runs the PCA onto a particular dataset. Transform applies that dimensionality 
-# reduction onto a different dataset.  
-
 #Plotting the Cumulative Summation of the Explained Variance
 plt.figure()
 plt.plot(np.cumsum(pca.explained_variance_ratio_))
 plt.xlabel('Number of Components')
-plt.ylabel('Variance (%)') #for each component
+plt.ylabel('Variance') #for each component
 plt.title('PCA - Oasis Grey Matter Explained Variance')
 plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/cumulative_sum.png")
 plt.show()
-
 
 #Create a pandas dataframe with the loadings for each component
 df = pd.DataFrame(GMtrain_compressed)
@@ -159,7 +165,7 @@ pipe = Pipeline([
     ('svr', svr)])                                                   
 ### Fit and predict
 pipefit = pipe.fit(GMtrain, age_train)
-type(pipefit) #just curious what this would return as type  
+print(type(pipefit)) #just curious what this would return as type  
 age_pred_reb = pipe.predict(GMtest)
 print(type(age_pred_reb)) #I'm guessing this will be an array of predicted y values
 
@@ -197,6 +203,14 @@ coef = svr.coef_
 coef = pca.inverse_transform(coef)
 print(coef) #just curious what this outputs
 
+#reprinting this for sake of creating isolated code 
+nifti_masker = NiftiMasker(
+    standardize=False,
+    smoothing_fwhm=2,
+    memory='nilearn_cache')  # cache options
+
+"""
+*******Uncomment this out once you've saved oasis_dataset as an object onto disk
 # reverse masking
 weight_img = nifti_masker.inverse_transform(coef)
 print(type(weight_img)) #Curious, I expect this to be a two-dimensional array (voxel & weight)
@@ -207,18 +221,18 @@ z_slice = 0 #Horizontal slice of the brain
 
 fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
 
-# Hard setting vmax to highlight weights more - in other words, normalizing
+# Hard setting vmax to highlight weights more - in other words, normalizing?
 display = plot_stat_map(weight_img, bg_img=bg_filename,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig, vmax=1)
 display.title('SVM weights', y=1.2)
 plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/svm_inverse.png")
-
+"""
 
 print("reached the end of the PCA-SVM program; if plots have not been made you should worry")
 
 #------------------------------------------------
-
+"""
 print("ANOVA + SVR")
 # Define the prediction function to be used.
 # Here we use a Support Vector Classification, with a linear kernel
@@ -308,3 +322,5 @@ print("%d detections" % n_detections)
 
 #savefig here
 show()
+#should this be plot.show()
+"""

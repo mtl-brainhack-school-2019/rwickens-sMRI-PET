@@ -4,3 +4,4 @@ nilearn_cache/
 ages.npy
 oasis.npy
 .vscode
+cortical_data.csv
