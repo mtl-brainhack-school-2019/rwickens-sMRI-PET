@@ -3,15 +3,14 @@
 
 """
 
-This jupyter notebook includes code taken from the nilearn project, 
+This program includes code taken from the nilearn project, 
 "Voxel-Based Morphometry on Oasis dataset", which predicts age from
-grey matter morhpometry. Feature redux = k-best ANOVA, prediction function = SVM. 
+grey matter morhpometry. 
 
-I am tweaking the code to add the following:  
-Train_test_split
-Feature redux = PCA, prediction function = SVM.
-Inverse image to show the voxels corresponding to support vector weights
-Various plots
+I have tweaked the code to add the following:  
+- Train_test_split
+- Feature redux = PCA, prediction function = SVR
+- Various plots
 
 Eventually add k-fold validation
 Try radial basis function support vector regressor? 
@@ -19,22 +18,22 @@ C and epsilon terms...
 
 PCA appears to improve the model compared to the ANOVA for feature selection. 
 
-To-do list: 
+To-do list:
+- Solve nifti masker problem 
 - Save oasis dataset as an object on computer; load  
-- Why are your figures not showing up and not saving? 
-- Difference between plt.show() versus just show()
+- Scree plot
 
 """
 
-# Let's keep our notebook clean, so it's a little more readable!
 import warnings
 warnings.filterwarnings("ignore")
-
-#All imports
 from nilearn import datasets
 from nilearn import plotting
 from nilearn.plotting import plot_stat_map, show
+import copy
+from copy import deepcopy
 import os
+import pickle
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -53,21 +52,23 @@ from sklearn.pipeline import Pipeline
 """
 #**********************************************************************
 #*Only run this chunk of code once to download arrays to disk! 
-oasis_dataset = datasets.fetch_oasis_vbm() #Selected all 403 subjects
 
-#Let's plot the first subject's neuroimage for fun. 
+subjects = 403
+oasis_dataset = datasets.fetch_oasis_vbm(n_subjects = subjects) #type is sklearn.utils.bunch
+
+#Let's plot the first subject's brain scan for fun. 
 subject1 = oasis_dataset.gray_matter_maps[0]
 plotting.view_img(subject1)
-#save this image somewhere
 
-gray_matter_map_filenames = oasis_dataset.gray_matter_maps
+with open("gray_filenames.pkl", "ab") as f:
+    pickle.dump(oasis_dataset.gray_matter_maps, f)
 
 nifti_masker = NiftiMasker(
     standardize=False,
     smoothing_fwhm=2,
     memory='nilearn_cache')  # cache options
 
-gm_maps_masked_nondisk = nifti_masker.fit_transform(gray_matter_map_filenames)
+gm_maps_masked_nondisk = nifti_masker.fit_transform(oasis_dataset.gray_matter_maps)
 age_nondisk = oasis_dataset.ext_vars['age'].astype(float)
 
 #Save grey matter array onto disk
@@ -76,15 +77,29 @@ np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy", gm_maps_m
 #Save age (our y-variable) array onto disk 
 np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/ages.npy", age_nondisk)
 
-#Only run this chunk of code once to download arrays to disk! 
-#*****************************************************
 """
 
+#*****************************************************
+
+with open("gray_filenames.pkl", "rb") as f:
+    gray_matter_map_filenames = pickle.load(f)
 
 #load grey matter array (x-variables) array from disk
-gm_maps_masked = np.load("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy")
+gm_maps_masked = np.load("C:/Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/oasis.npy")
+
 #Load age array (y-variable) from disk
-age = np.load("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/ages.npy")
+age = np.load("C:/Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/ages.npy")
+
+# Locate these files on your disk
+print('First gray-matter anatomy image (3D) is located at: %s' %
+      gray_matter_map_filenames[0])  # 3D data
+#print('First white-matter anatomy image (3D) is located at: %s' %
+      #oasis_dataset.white_matter_maps[0])  # 3D data
+
+#Let's plot the first subject's brain scan for fun. 
+subject1 = gray_matter_map_filenames[0]
+plotting.view_img(subject1)
+#save this image somewhere
 
 n_samples, n_features = gm_maps_masked.shape
 print(age.shape)
@@ -93,11 +108,6 @@ print("%d samples, %d features" % (n_samples, n_features))
 print(np.amax(gm_maps_masked))
 #Hm. I wonder what units this is in. I was under the impression
 #that tissue values represent probability, which should be between 0 and 1.
-
-# Let's plot the distribution to see if this looks like a probability or not
-plt.hist(gm_maps_masked, bins=10)
-plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/ournewdistributionfigure.png")
-plt.show()
 
 print(np.amin(gm_maps_masked))
 #A minimum of 0 is good. 
@@ -125,9 +135,9 @@ GMtest_compressed = pca.transform(GMtest) # Fit the data for the test set
 # reduction onto a different dataset.  
 
 #Some checks to see if the number of components makes sense
-print("shape of gm_maps_masked is %f" % gm_maps_masked.shape)
-print("shape of GMtrain_compressed is %g" % GMtrain_compressed.shape)
-print("shape of GMtest_compressed is %r" % GMtest_compressed.shape)
+#print("shape of gm_maps_masked is %f" % gm_maps_masked.shape)
+#print("shape of GMtrain_compressed is %g" % GMtrain_compressed.shape)
+#print("shape of GMtest_compressed is %r" % GMtest_compressed.shape)
 
 #Plotting the Cumulative Summation of the Explained Variance
 plt.figure()
@@ -135,66 +145,51 @@ plt.plot(np.cumsum(pca.explained_variance_ratio_))
 plt.xlabel('Number of Components')
 plt.ylabel('Variance') #for each component
 plt.title('PCA - Oasis Grey Matter Explained Variance')
-plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/cumulative_sum.png")
+#plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/cumulative_sum.png")
 plt.show()
 
 #Create a pandas dataframe with the loadings for each component
 df = pd.DataFrame(GMtrain_compressed)
-print(df)
 
 #Creating a plot showing variance explained by first 20 components. 
 
-print(len(pca.explained_variance_ratio_)) #should be 100, or whatever set to
-print(type(pca.explained_variance_ratio_)) #should be numpy array
 shortened_components = pca.explained_variance_ratio_[:20] #will this get the first 20 items of the array...
-
 mylist = []
 for i in range(20): 
     mylist.append("PCA%i" % i)
-mylist
 
 plt.figure(figsize=(15,5))
 df = pd.DataFrame({'var':shortened_components,
              'PC':mylist})
 sns.barplot(x='PC',y="var", 
            data=df, color="c")
-plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/barplot.png")
+plt.show()
+#plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/barplot.png")
 
 pipe = Pipeline([
     ('PCA', PCA(random_state=123)), 
     ('svr', svr)])                                                   
 ### Fit and predict
 pipefit = pipe.fit(GMtrain, age_train)
-print(type(pipefit)) #just curious what this would return as type  
-age_pred_reb = pipe.predict(GMtest)
-print(type(age_pred_reb)) #I'm guessing this will be an array of predicted y values
-
-"""
-if (len(age)==len(age_pred_reb)):
-    #compute ordinary least squares here to get model accuracy
-else:
-    print("cannot compute residuals because of different array size!")
-"""    
+age_pred_reb = pipe.predict(GMtest) # returns a numpy array
 
 # Measure accuracy with cross-validation
 # This is to test the fit of the training data ONLY! 
-cv_scores_train = cross_val_score(pipe, GMtrain, age_train)
-print("The accuracy of the training svm model in predicting training data is %a" % cv_scores_train)
+cv_scores_train = cross_val_score(pipe, GMtrain, age_train) 
+mean_cv_scores_train = np.mean(cv_scores_train)
+print("The accuracy of the TRAINING svm model in predicting training data is %a" % mean_cv_scores_train)
 
-# Measure accuracy with cross validation
-# Running cross-validation on TEST DATA - the interesting part! 
+# Running cross-validation on test data 
 cv_scores_test = cross_val_score(pipe, GMtest, age_test)
-print("The accuracy of the training svm model in predicting test data is %d" % cv_scores_test)
-
-difference = (cv_scores_train - cv_scores_test)
-
-print("The difference between testing and training accuracy is %c" % difference)
 
 # Return the corresponding mean prediction accuracy
 prediction_accuracy = np.mean(cv_scores_test)
 print("=== SVM ===")
 print("Prediction accuracy: %f" % prediction_accuracy)
 print("")
+
+difference = (mean_cv_scores_train - prediction_accuracy)
+print("The difference between testing and training accuracy is %c" % difference)
 
 # retrieving the coefficients, or weights, of the linear svr 
 coef = svr.coef_
@@ -203,22 +198,25 @@ coef = svr.coef_
 coef = pca.inverse_transform(coef)
 print(coef) #just curious what this outputs
 
-#reprinting this for sake of creating isolated code 
+# reverse masking
+
 nifti_masker = NiftiMasker(
     standardize=False,
     smoothing_fwhm=2,
     memory='nilearn_cache')  # cache options
 
-"""
-*******Uncomment this out once you've saved oasis_dataset as an object onto disk
-# reverse masking
+var1 = nifti_masker.fit_transform(gray_matter_map_filenames)
+
 weight_img = nifti_masker.inverse_transform(coef)
 print(type(weight_img)) #Curious, I expect this to be a two-dimensional array (voxel & weight)
 
-# Create the figure based on the first subject's scan
-bg_filename = oasis_dataset.gray_matter_maps[0]
-z_slice = 0 #Horizontal slice of the brain
+# *******Uncomment this out once you've saved oasis_dataset as an object onto disk?
 
+# Create the figure based on the first subject's scan
+#bg_filename = oasis_dataset.gray_matter_maps[0] #source code
+bg_filename = "C:/Users/rwick/nilearn_data/oasis1/OAS1_0001_MR1/mwrc1OAS1_0001_MR1_mpr_anon_fslswapdim_bet.nii.gz"
+#OR bg_filename = grey_matter_map_filenames[0]
+z_slice = 0 #Horizontal slice of the brain
 fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
 
 # Hard setting vmax to highlight weights more - in other words, normalizing?
@@ -227,12 +225,11 @@ display = plot_stat_map(weight_img, bg_img=bg_filename,
                         figure=fig, vmax=1)
 display.title('SVM weights', y=1.2)
 plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/svm_inverse.png")
-"""
 
 print("reached the end of the PCA-SVM program; if plots have not been made you should worry")
 
 #------------------------------------------------
-"""
+
 print("ANOVA + SVR")
 # Define the prediction function to be used.
 # Here we use a Support Vector Classification, with a linear kernel
@@ -271,7 +268,6 @@ coef = variance_threshold.inverse_transform(coef)
 weight_img = nifti_masker.inverse_transform(coef)
 
 # Create the figure
-from nilearn.plotting import plot_stat_map, show
 bg_filename = gray_matter_map_filenames[0]
 z_slice = 0
 
@@ -320,7 +316,4 @@ display.title(title, y=1.2)
 n_detections = (signed_neg_log_pvals_unmasked.get_data() > threshold).sum()
 print("%d detections" % n_detections)
 
-#savefig here
 show()
-#should this be plot.show()
-"""

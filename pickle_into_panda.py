@@ -9,8 +9,9 @@ Ideas for classifiers to explore:
 - Random forest 
 
 Goals: 
-- Plot distributions of predictor variables 
+- Plot histograms of predictor variables to check assumptions
 - Create ROCs
+- Look into implementing regularizers / penalty functions / sparsity
 """
 
 import pickle
@@ -78,6 +79,7 @@ xtrain, xtest, ytrain, ytest = train_test_split(predictors, diagnosis, stratify 
 
 #check underlying assumption before running Gaussian naive bayes classifier 
 
+#Pseudocode:
 # turn each column of test DF into numpy array
 # cycle through and run stats.ktest(x[i], 'norm')
 # append results into some list with printed index
