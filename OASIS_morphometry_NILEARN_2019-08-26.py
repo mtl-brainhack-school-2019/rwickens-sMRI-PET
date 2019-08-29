@@ -1,30 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-"""
-
-This program includes code taken from the nilearn project, 
-"Voxel-Based Morphometry on Oasis dataset", which predicts age from
-grey matter morhpometry. 
-
-I have tweaked the code to add the following:  
-- Train_test_split
-- Feature redux = PCA, prediction function = SVR
-- Various plots
-
-Eventually add k-fold validation
-Try radial basis function support vector regressor? 
-C and epsilon terms...
-
-PCA appears to improve the model compared to the ANOVA for feature selection. 
-
-To-do list:
-- Solve nifti masker problem 
-- Save oasis dataset as an object on computer; load  
-- Scree plot
-
-"""
-
 import warnings
 warnings.filterwarnings("ignore")
 from nilearn import datasets
@@ -44,6 +20,7 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
+from sklearn.feature_selection import VarianceThreshold, SelectKBest, f_regression
 from sklearn.svm import SVR
 from sklearn.decomposition import PCA
 #from sklearn.preprocessing import MinMaxScaler
@@ -77,9 +54,8 @@ np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/oasis.npy", gm_maps_m
 #Save age (our y-variable) array onto disk 
 np.save("C:/Users/rwick/Documents/GitHub/rwickens-sMRI-PET/ages.npy", age_nondisk)
 
-"""
-
 #*****************************************************
+"""
 
 with open("gray_filenames.pkl", "rb") as f:
     gray_matter_map_filenames = pickle.load(f)
@@ -168,16 +144,17 @@ plt.show()
 
 pipe = Pipeline([
     ('PCA', PCA(random_state=123)), 
-    ('svr', svr)])                                                   
+    ('svr', svr)])
+
 ### Fit and predict
 pipefit = pipe.fit(GMtrain, age_train)
-age_pred_reb = pipe.predict(GMtest) # returns a numpy array
+age_pred_pipe = pipe.predict(GMtest) # returns a numpy array
 
 # Measure accuracy with cross-validation
 # This is to test the fit of the training data ONLY! 
 cv_scores_train = cross_val_score(pipe, GMtrain, age_train) 
-mean_cv_scores_train = np.mean(cv_scores_train)
-print("The accuracy of the TRAINING svm model in predicting training data is %a" % mean_cv_scores_train)
+training_prediction_accuracy = np.mean(cv_scores_train)
+print("The accuracy of the TRAINING svm model in predicting training data is %a" % training_prediction_accuracy)
 
 # Running cross-validation on test data 
 cv_scores_test = cross_val_score(pipe, GMtest, age_test)
@@ -188,8 +165,10 @@ print("=== SVM ===")
 print("Prediction accuracy: %f" % prediction_accuracy)
 print("")
 
-difference = (mean_cv_scores_train - prediction_accuracy)
+difference = (training_prediction_accuracy - prediction_accuracy)
 print("The difference between testing and training accuracy is %c" % difference)
+
+# Now, creating the inverse image to show the svr weights back on a horizontal slice of a scan
 
 # retrieving the coefficients, or weights, of the linear svr 
 coef = svr.coef_
@@ -205,25 +184,23 @@ nifti_masker = NiftiMasker(
     smoothing_fwhm=2,
     memory='nilearn_cache')  # cache options
 
-var1 = nifti_masker.fit_transform(gray_matter_map_filenames)
+fit_transform_nifti_masker = nifti_masker.fit_transform(gray_matter_map_filenames)
 
-weight_img = nifti_masker.inverse_transform(coef)
-print(type(weight_img)) #Curious, I expect this to be a two-dimensional array (voxel & weight)
+weight_img = fit_transform_nifti_masker.inverse_transform(coef) # type nibabel.nifti1.Nifti1Image
 
 # *******Uncomment this out once you've saved oasis_dataset as an object onto disk?
 
 # Create the figure based on the first subject's scan
-#bg_filename = oasis_dataset.gray_matter_maps[0] #source code
-bg_filename = "C:/Users/rwick/nilearn_data/oasis1/OAS1_0001_MR1/mwrc1OAS1_0001_MR1_mpr_anon_fslswapdim_bet.nii.gz"
-#OR bg_filename = grey_matter_map_filenames[0]
-z_slice = 0 #Horizontal slice of the brain
+bg_filename = bg_filename = gray_matter_map_filenames[0]
+# bg_filename = "C:/Users/rwick/nilearn_data/oasis1/OAS1_0001_MR1/mwrc1OAS1_0001_MR1_mpr_anon_fslswapdim_bet.nii.gz"
+z_slice = 0 # Horizontal slice of the brain
 fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
 
-# Hard setting vmax to highlight weights more - in other words, normalizing?
+# Hard setting vmax (upper bound for plotting) to highlight weights more 
 display = plot_stat_map(weight_img, bg_img=bg_filename,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig, vmax=1)
-display.title('SVM weights', y=1.2)
+display.title('SVM weights PCA SVR', y=1.2)
 plt.savefig("C:Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/svm_inverse.png")
 
 print("reached the end of the PCA-SVM program; if plots have not been made you should worry")
@@ -233,11 +210,9 @@ print("reached the end of the PCA-SVM program; if plots have not been made you s
 print("ANOVA + SVR")
 # Define the prediction function to be used.
 # Here we use a Support Vector Classification, with a linear kernel
-from sklearn.svm import SVR
-svr = SVR(kernel="linear")
+svr2 = SVR(kernel="linear")
 
 # Dimension reduction
-from sklearn.feature_selection import VarianceThreshold, SelectKBest, f_regression
 
 # Remove features with too low between-subject variance
 variance_threshold = VarianceThreshold(threshold=.01)
@@ -253,19 +228,20 @@ from sklearn.pipeline import Pipeline
 anova_svr = Pipeline([
             ('variance_threshold', variance_threshold),
             ('anova', feature_selection),
-            ('svr', svr)])
+            ('svr', svr2)])
 
 ### Fit and predict
 anova_svr.fit(gm_maps_masked, age)
-age_pred = anova_svr.predict(gm_maps_masked)
+age_pred_anovasvr = anova_svr.predict(gm_maps_masked)
 
-coef = svr.coef_
+coef_anovasvr = svr2.coef_
 # reverse feature selection
-coef = feature_selection.inverse_transform(coef)
+coef_anovasvr = feature_selection.inverse_transform(coef_anovasvr)
 # reverse variance threshold
-coef = variance_threshold.inverse_transform(coef)
+coef_anovasvr = variance_threshold.inverse_transform(coef_anovasvr)
 # reverse masking
-weight_img = nifti_masker.inverse_transform(coef)
+# weight_img here xxx
+weight_img_anovasvr = fit_transform_nifti_masker.inverse_transform(coef_anovasvr)
 
 # Create the figure
 bg_filename = gray_matter_map_filenames[0]
@@ -276,16 +252,15 @@ fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
 display = plot_stat_map(weight_img, bg_img=bg_filename,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig, vmax=1)
-display.title("SVM weights", y=1.2)
+display.title("SVM weights ANOVA SVR", y=1.2)
 
 # Measure accuracy with cross validation
-from sklearn.model_selection import cross_val_score
-cv_scores = cross_val_score(anova_svr, gm_maps_masked, age)
+cv_scores_anovasvr = cross_val_score(anova_svr, gm_maps_masked, age)
 
 # Return the corresponding mean prediction accuracy
-prediction_accuracy = np.mean(cv_scores)
+prediction_accuracy_anovasvr = np.mean(cv_scores_anovasvr)
 print("=== ANOVA ===")
-print("Prediction accuracy: %f" % prediction_accuracy)
+print("Prediction accuracy: %f" % prediction_accuracy_anovasvr)
 print("")
 
 ### Inference with massively univariate model #################################
@@ -317,3 +292,5 @@ n_detections = (signed_neg_log_pvals_unmasked.get_data() > threshold).sum()
 print("%d detections" % n_detections)
 
 show()
+
+print("reached the end of the ANOVA-SVM program; if plots have not been made you should worry")
