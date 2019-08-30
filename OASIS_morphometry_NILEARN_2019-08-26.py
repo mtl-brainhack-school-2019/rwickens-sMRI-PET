@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from nilearn.input_data import NiftiMasker
 import sklearn
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
+#from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from sklearn.feature_selection import VarianceThreshold, SelectKBest, f_regression
 from sklearn.svm import SVR
@@ -184,19 +184,15 @@ print("The difference between testing and training accuracy is " , difference)
 # versus the actual age
 
 # create pandas array to sort true ages ascending, then plot a figure that is less jagged 
+# figure will show prediction error
 
 df_ages = pd.DataFrame(data=age_test, columns = ['true age'])
 df_ages['predicted age'] = pd.Series(age_pred_pipe)
 df_ages['raw diff'] = df_ages['predicted age']-df_ages['true age']
 df_ages['abs diff'] = df_ages['raw diff'].abs()
-#df_ages['squared diff'] = (df_ages['raw diff'])^2
 df_ages_sorted = df_ages.sort_values(by = ['true age'])
-#df_ages_sorted = df_ages_sorted.set_index('true age')
 print(df_ages_sorted.head())
 print(df_ages_sorted.mean(axis=0))
-#df_ages_sorted['Index'] = subjects_array
-#df_ages.sorted.plot(x = 'Index', y = 'true age')
-#df_ages.sorted.plot(x = 'Index', y = 'predicted age')
 
 np_df_ages_sorted_true_age = np.array(df_ages_sorted['true age'])
 np_df_ages_sorted_predicted_age = np.array(df_ages_sorted['predicted age'])
@@ -253,8 +249,31 @@ display.title('SVM weights PCA SVR', y=1.2)
 
 """
 
-"""
 #------------------------------------------------
+# First, making sure that variables are re-set so that any memory from 
+# running the past program are overwritten
+
+with open("C:/Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/gray_filenames.pkl", "rb") as f:
+    gray_matter_map_filenames = pickle.load(f)
+
+"""  
+# Loop through all of the grey matter mask files to remove background
+bm = datasets.load_mni152_brain_mask()
+bmd = bm.get_data() > 0
+gm_nobg = []
+for gm in gray_matter_map_filenames:
+    gmd = nib.load(gm)
+    gm_nobg += [gmd.get_data()[bmd]]
+
+gm_maps_masked = np.array(gm_nobg)
+"""
+#load grey matter array (x-variables) array from disk
+gm_maps_masked = np.load("C:/Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/oasis.npy")
+
+#Load age array (y-variable) from disk
+age = np.load("C:/Users/rwick/Documents/GitHubNew/rwickens-sMRI-PET/ages.npy")
+
+GMtrain, GMtest, age_train, age_test = train_test_split(gm_maps_masked, age, random_state=1)
 
 print("ANOVA + SVR")
 # Define the prediction function to be used.
@@ -282,8 +301,11 @@ anova_svr = Pipeline([
             ('svr', svr2)])
 
 ### Fit and predict
-anova_svr.fit(gm_maps_masked, age)
-age_pred_anovasvr = anova_svr.predict(gm_maps_masked)
+anova_svr.fit(GMtrain, age_train)
+age_pred_anovasvr = anova_svr.predict(GMtest)
+
+"""
+### Projection back onto the image. This is buggy so I'm commenting it out
 
 coef_anovasvr = svr2.coef_
 # reverse feature selection
@@ -291,7 +313,15 @@ coef_anovasvr = feature_selection.inverse_transform(coef_anovasvr)
 # reverse variance threshold
 coef_anovasvr = variance_threshold.inverse_transform(coef_anovasvr)
 # reverse masking
-# weight_img here xxx
+
+# weight_img here 
+
+nifti_masker = NiftiMasker(
+    standardize=False,
+    smoothing_fwhm=2,
+    memory='nilearn_cache')  # cache options
+
+fit_transform_nifti_masker = nifti_masker.fit_transform(gray_matter_map_filenames)
 weight_img_anovasvr = fit_transform_nifti_masker.inverse_transform(coef_anovasvr)
 
 # Create the figure
@@ -300,25 +330,56 @@ z_slice = 0
 
 fig = plt.figure(figsize=(5.5, 7.5), facecolor='k')
 # Hard setting vmax to highlight weights more
-display = plot_stat_map(weight_img, bg_img=bg_filename,
+display = plot_stat_map(weight_img_anovasvr, bg_img=bg_filename,
                         display_mode='z', cut_coords=[z_slice],
                         figure=fig, vmax=1)
 display.title("SVM weights ANOVA SVR", y=1.2)
+"""
 
 # Measure accuracy with cross validation
-cv_scores_anovasvr = cross_val_score(anova_svr, gm_maps_masked, age)
 
-# Return the corresponding mean prediction accuracy
-prediction_accuracy_anovasvr = np.mean(cv_scores_anovasvr)
+# First checking training data prediction on itself
+
+cv_scores_anovasvr_train = cross_val_score(anova_svr, GMtrain, age_train)
+training_prediction_accuracy_anovasvr = np.mean(cv_scores_anovasvr_train)
+print("The accuracy of the anova-svm model in predicting the TRAINING data is", training_prediction_accuracy_anovasvr)
+
+cv_scores_anovasvr_testing = cross_val_score(anova_svr, GMtest, age_test)
+testing_prediction_accuracy_anovasvr = np.mean(cv_scores_anovasvr_testing)
+
+# Return the corresponding mean prediction accuracy for testing
 print("=== ANOVA ===")
-print("Prediction accuracy: %f" % prediction_accuracy_anovasvr)
+print("Prediction accuracy (TEST): %f" % testing_prediction_accuracy_anovasvr)
 print("")
 
+# Create plot comparing y-hat predicted age and true age 
+
+df_ages_anovasvr = pd.DataFrame(data=age_test, columns = ['true age'])
+df_ages_anovasvr['predicted age'] = pd.Series(age_pred_anovasvr)
+df_ages_anovasvr['raw diff'] = df_ages_anovasvr['predicted age']-df_ages_anovasvr['true age']
+df_ages_anovasvr['abs diff'] = df_ages_anovasvr['raw diff'].abs()
+df_ages_sorted_anovasvr = df_ages_anovasvr.sort_values(by = ['true age'])
+print(df_ages_sorted_anovasvr.head())
+print(df_ages_sorted_anovasvr.mean(axis=0))
+
+np_df_ages_sorted_true_age_anovasvr = np.array(df_ages_sorted_anovasvr['true age'])
+np_df_ages_sorted_predicted_age_anovasvr = np.array(df_ages_sorted_anovasvr['predicted age'])
+subjects_array = np.arange(0, 101, 1)
+
+plt.plot(subjects_array, np_df_ages_sorted_true_age_anovasvr, 'x')
+plt.plot(subjects_array, np_df_ages_sorted_predicted_age_anovasvr, 'o')
+plt.legend(['true age anovasvr','predicted_age anovasvr'])
+plt.xlabel('Subject')
+plt.ylabel('Age') #for each component
+plt.title('Predicted versus True Age ANOVA + SVR')
+plt.show()
+
+"""
 ### Inference with massively univariate model #################################
 print("Massively univariate model")# Statistical inference
-data = variance_threshold.fit_transform(gm_maps_masked)
+data = variance_threshold.fit_transform(GMtrain)
 neg_log_pvals, t_scores_original_data, _ = permuted_ols(
-    age, data,  # + intercept as a covariate by default
+    age_train, data,  # + intercept as a covariate by default
     n_perm=2000,  # 1,000 in the interest of time; 10000 would be better
     n_jobs=1)  # can be changed to use more CPUs
 signed_neg_log_pvals = neg_log_pvals * np.sign(t_scores_original_data)
