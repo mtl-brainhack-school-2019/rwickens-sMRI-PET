@@ -190,6 +190,7 @@ df_ages = pd.DataFrame(data=age_test, columns = ['true age'])
 df_ages['predicted age'] = pd.Series(age_pred_pipe)
 df_ages['raw diff'] = df_ages['predicted age']-df_ages['true age']
 df_ages['abs diff'] = df_ages['raw diff'].abs()
+df_ages['squared diff'] = (df_ages['abs diff'])**2
 df_ages_sorted = df_ages.sort_values(by = ['true age'])
 print(df_ages_sorted.head())
 print(df_ages_sorted.mean(axis=0))
@@ -358,6 +359,7 @@ df_ages_anovasvr = pd.DataFrame(data=age_test, columns = ['true age'])
 df_ages_anovasvr['predicted age'] = pd.Series(age_pred_anovasvr)
 df_ages_anovasvr['raw diff'] = df_ages_anovasvr['predicted age']-df_ages_anovasvr['true age']
 df_ages_anovasvr['abs diff'] = df_ages_anovasvr['raw diff'].abs()
+df_ages_anovasvr['squared diff'] = (df_ages_anovasvr['abs diff'])**2
 df_ages_sorted_anovasvr = df_ages_anovasvr.sort_values(by = ['true age'])
 print(df_ages_sorted_anovasvr.head())
 print(df_ages_sorted_anovasvr.mean(axis=0))
