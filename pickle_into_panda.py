@@ -9,7 +9,7 @@ Ideas for classifiers to explore:
 - Random forest 
 
 Goals: 
-- Plot histograms of predictor variables to check assumptions
+- Run k-s tests on predictor variables to check assumptions
 - Create ROCs
 - Look into implementing regularizers / penalty functions / sparsity
 """
@@ -83,16 +83,18 @@ xtrain, xtest, ytrain, ytest = train_test_split(predictors, diagnosis, stratify 
 # turn each column of test DF into numpy array
 # cycle through and run stats.ktest(x[i], 'norm')
 # append results into some list with printed index
-# if the proportion of significant results is > than my alpha level (0.05), I'll ask for advice 
+# if the proportion of significant results is < than my alpha level (0.05), I'll consider this a safe endeavour 
  
 # x = numpy array
 # stats.kstest(x, 'norm')
 
-#from sklearn.naive_bayes import GaussianNB
 model = GaussianNB()
 model.fit(xtrain, ytrain)
-ytest = model.predict(xtest)
-yprob_test = model.predict_proba(xtest)
+y_hat = model.predict(xtest)
+#yprob_test = model.predict_proba(xtest)
+
+# plot prior probabilities 
+
 
 
 
