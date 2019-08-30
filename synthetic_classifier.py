@@ -2,16 +2,13 @@
 Using synthetic data graciously created by Joshua Morse, I am attempting to create one or more
 classifiers to predict group diagnosis - Alzheimer's disease (1) versus healthy control (0)
 
-Ideas for classifiers to explore:
 - (Gaussian) naive bayes 
-- Logistic regression 
-- Discriminant function analysis
 - Random forest 
 
 Goals: 
-- Run k-s tests on predictor variables to check assumptions
+- Run k-s tests on predictor variables to check assumptions 
 - Create ROCs
-- Look into implementing regularizers / penalty functions / sparsity
+
 """
 
 import pickle
@@ -19,6 +16,7 @@ import numpy as np
 import pandas as pd
 import sklearn
 from sklearn import metrics
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 #from sklearn.model_selection import KFold
 #from sklearn.model_selection import cross_val_score # possibly for continuous data only
@@ -27,8 +25,7 @@ import scipy.stats as stats
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.datasets import make_classification
 
-
-# GETTING X AND Y VARIABLES READY ##################
+# Getting x and y variables ready #######
 
 with open("data.pkl", "rb") as f:
     ad_ages = pickle.load(f) #ages AD
@@ -50,7 +47,7 @@ hc_df['AD'] = 0
 
 # Append one list to another
 data = ad_df.append(hc_df)
-print(data.head())
+#print(data.head())
 
 #let's get a sense of the number of subjects in each group. 
 
@@ -62,14 +59,8 @@ print(hc_df.shape)
 #Note to self: indices 0-999 are AD; indices 1000 to 1999 are HC
 
 ages = data['age']
-#print(ages)
-
 diagnosis = data['AD']
-#print(diagnosis)
-
 thickness = data.iloc[:,0:-2]
-#print(thickness)
-
 predictors = data.iloc[:,0:-1]
 
 #####################
@@ -88,12 +79,34 @@ xtrain, xtest, ytrain, ytest = train_test_split(predictors, diagnosis, stratify 
 # x = numpy array
 # stats.kstest(x, 'norm')
 
-model = GaussianNB()
-model.fit(xtrain, ytrain)
-y_hat = model.predict(xtest)
-#yprob_test = model.predict_proba(xtest)
+model_NB = GaussianNB()
+model_NB.fit(xtrain, ytrain)
+y_hat = model_NB.predict(xtest)
+
+ytest = np.array(ytest)
+ytest = pd.Series(ytest)
+df_bayes_accuracy = pd.DataFrame(data = ytest, columns = ['true diagnosis'])
+df_bayes_accuracy['predicted probability'] = pd.Series(y_hat)
+print(df_bayes_accuracy.head())
+
+print(accuracy_score(ytest, y_hat))
+# outputs: 66% accuracy. Not so great. 
 
 # plot prior probabilities 
+yprob_test = model_NB.predict_proba(xtest)
+print(yprob_test)
+
+# Now trying random forest
+
+model_RF = RandomForestClassifier(n_estimators = 65, random_state = 123)
+model_RF.fit(xtrain, ytrain)
+y_hat_RF = model_RF.predict(xtest)
+
+df_RF_accuracy = pd.DataFrame(data = ytest, columns = ['true diagnosis'])
+df_RF_accuracy['predicted probability'] = pd.Series(y_hat_RF)
+print(df_RF_accuracy.head())
+
+print(accuracy_score(ytest, y_hat_RF)) 
 
 
 
