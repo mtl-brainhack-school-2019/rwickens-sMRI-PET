@@ -5,3 +5,4 @@ ages.npy
 oasis.npy
 .vscode
 cortical_data.csv
+data.pkl
