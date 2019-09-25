@@ -1,13 +1,12 @@
 #!/usr/bin/python
-# open shell and type chmod 755 ./automate_PET.py
-# does one need to write python ./xxx.py
+# open shell and type chmod 755 ./automate_PET.py 
 
 # Should it be Popen, run, or call? Use communicate? 
 # shell = True, will it work with lists (medium article saying items ignored.)
 # Ensure that key variables get treated as integers for MINC rather than strings
 
 # Specifications: PET file is the one with multiple (6) frames. MRI file has already been run on CIVET
-# Weight, dose, and maskbinvalue are numeric (float). The rest are string and must be surrounded by quotation marks.  
+# Weight, dose, and maskbinvalue are numeric (float). The rest are string.  
 
 from copy import deepcopy
 import argparse
