@@ -2,7 +2,7 @@
 # open shell and type chmod 755 ./automate_PET.py 
 
 # Should it be Popen, run, or call? Use communicate? 
-# shell = True, will it work with lists (medium article saying items ignored.)
+# shell = True, is it even needed? 
 # Ensure that key variables get treated as integers for MINC rather than strings
 
 # Specifications: PET file is the one with multiple (6) frames. MRI file has already been run on CIVET
@@ -18,7 +18,16 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
     with open('output.txt', 'w') as f: 
 
         def bash_command(cmd):
-        subprocess.Popen(cmd, shell=True, stdout=f, check=True)
+            subprocess.Popen(cmd, shell=False, stdout=f, check=True)
+
+        """
+        def bash_command(cmd):
+            subprocess.Popen(cmd, shell=True, executable='/bin/bash')
+
+        def bash_command(cmd):
+            subprocess.Popen(['/bin/bash', '-c', cmd])
+
+        """
 
         mylist = []
        
@@ -41,7 +50,7 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         outputPETpath = outputPETpath[:-4] + "_suv" + outputPETpath[-4:]
         mylist.append(outputPETpath)
         bash_command(['mincmath', '-div', mylist[-2], '-const', constant, outputPETpath])
-        # bash_command(['mincmath -div', mylist[-2], '-const', constant, outputPETpath])
+        # bash_command('mincmath -div', mylist[-2], '-const', constant, outputPETpath)
         # output should be PETpath_avg_suv.mnc
         # make sure constant gets passed in as int  
 
@@ -54,7 +63,7 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         bash_command(['source', mincconfigpath])
         # bash_command('source', mincconfigpath)  
         bash_command([mincbestlinregpath, '–nmi', '–lsq6', mylist[-2], MRIpath, outputPETpath_xfm, outputPETpath])
-        bash_command(mincbestlinregpath, '–nmi –lsq6', mylist[-2], MRIpath, outputPETpath_xfm, outputPETpath])
+        # bash_command(mincbestlinregpath, '–nmi –lsq6', mylist[-2], MRIpath, outputPETpath_xfm, outputPETpath)
         # output should be PETpath_avg_suv_autoreg.mnc or .xfm
         
         #5. Linear and non-linear transformations to put the PET file into MNI space (toST = to Standard Template)
@@ -71,7 +80,8 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
 
         #6A. Take the SUVR in MNIspace
         mylist_patient = deepcopy(mylist)
-        mask_SUV = subprocess.Popen(['mincstats', '-mask', maskpath, '-mask_binvalue', masknumber, outputPETpath, '-mean'] , capture_input=True)
+        mask_SUV = subprocess.Popen(['mincstats', '-mask', maskpath, '-mask_binvalue', masknumber, outputPETpath, '-mean'] , capture_input=True, stdout=f, check=True)
+        # mask_SUV = subprocess.Popen('mincstats -mask', maskpath, '-mask_binvalue', masknumber, outputPETpath, '-mean' , capture_input=True, shell=True, stdout=f, check=True)
         outputPETpath = outputPETpath[:-4] + "_SUVR" + outputPETpath[-4:]
         mylist.append(outputPETpath)
         bash_command(['mincmath', '-div', '-const', maskSUV, mylist[-2], outputPETpath])
@@ -86,7 +96,8 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         outputPETpath_patient = mylist_patient[-1]
         outputPETpath_patient = outputPETpath[:-4] + "_patient_SUVR" + outputPETpath[-4:]
         mylist_patient.append(outputPETpath_patient)
-        mask_SUV_patient = subprocess.Popen(['mincstats', '–mask', PET_subjectmask, '–mask_binvalue', mylist[-3], mylist_patient[-2], '–mean'], capture_input=True)
+        mask_SUV_patient = subprocess.Popen(['mincstats', '–mask', PET_subjectmask, '–mask_binvalue', mylist[-3], mylist_patient[-2], '–mean'], capture_input=True, stdout=f, check=True)
+        # mask_SUV_patient = subprocess.Popen(['mincstats –mask', PET_subjectmask, '–mask_binvalue', mylist[-3], mylist_patient[-2], '–mean', capture_input=True, shell=True, stdout=f, check=True)
         bash_command(['mincmath', '-div', '-const', mask_SUV_patient, mylist_patient[-2], outputPETpath_patient])
         # bash_command('mincmath -div -const', mask_SUV_patient, mylist_patient[-2], outputPETpath_patient)
         # make sure #mask_SUV_patient gets treated as int
