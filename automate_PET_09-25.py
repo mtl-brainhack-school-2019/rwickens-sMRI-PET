@@ -2,10 +2,8 @@
 
 # Specifications: PET file is the one with multiple (6) frames. MRI file has already been run on CIVET
 # Weight, dose, and maskbinvalue are numeric (float). The rest are string.
-# There are default values for masknumber, mincconfigpath, mincbestlinregpath, and blur. They are set to minc version 17 (Apple computer has version 16)
-# open shell and type chmod 755 ./automate_PET.py 
-# add Python 3 to path 
-# have output printed out in shell
+# There are default values for masknumber, mincconfigpath, mincbestlinregpath, and blur. They are set to minc version 16
+
 
 
 from copy import deepcopy
@@ -20,8 +18,23 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
 
     subject_code = os.path.basename(PETpath)
     subject_code = subject_code[:6]
+    print(subject_code)
     with open('output' + subject_code + '.txt', 'w') as f: 
-
+    #with open('output.txt', 'w') as f:
+        
+        weight = float(weight)
+        dose = float(dose)
+        PETpath = str(PETpath)
+        MRIpath = str(MRIpath)
+        talpath = str(talpath)
+        ITpath= str(ITpath)
+        MNItemplatepath = str(MNItemplatepath)
+        maskpath= str(maskpath)
+        masknumber= str(masknumber)
+        mincconfigpath= str(mincconfigpath)
+        mincbestlinregpath= str(mincbestlinregpath)
+        blur_mm= int(blur_mm)
+        
         def bash_command(cmd):
             subprocess.run(cmd, shell=False, stdout=f, check=True)
 
@@ -31,7 +44,7 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         outputPETpath = PETpath[:-1] + "mnc"
         mylist.append(outputPETpath)
         bash_command(['ecattominc', '-short', PETpath, outputPETpath])
-        # bash_command('ecattominc -short', PETpath, outputPETpath)
+        #bash_command('ecattominc -short', PETpath, outputPETpath)
 
         #  2. Average the PET frames
         outputPETpath = outputPETpath[:-4] + "_avg" + outputPETpath[-4:]
@@ -111,18 +124,17 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         #9. Finished! Shows the subject's PET file on MNI template
         bash_command(['register', outputPETpath, MNItemplatepath])
 
-# main(102, 8.4, "./ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc", "./FEOBV_PD_N50_01000104_t1.mnc", "./FEOBV_PD_N50_01000104_t1_tal.xfm", "./FEOBV_PD_N50_01000104_nlfit_It.xfm", "./mni_icbm152_tl_tal_nlin_sym_09c.mnc", "./WM_0.99_new.mnc", 1, "/opt/minc/1.9.16/minc-toolkit-config.sh", "/opt/minc/1.9.16/bin/bestlinreg_s", 8)
 # main(102, 8.4, "/Users/Labo-MAB/Desktop/automate_pet/ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1.mnc", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1_tal.xfm", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_nlfit_It.xfm", "/Users/Labo-MAB/Desktop/automate_pet/mni_icbm152_t1_tal_nlin_sym_09c.mnc", "/Users/Labo-MAB/Desktop/automate_pet/WM_0.99_new.mnc")
 
 parser = argparse.ArgumentParser('image processing inputs')
-parser.add_argument('--weight', type=float)
-parser.add_argument('--dose', type=float)
-parser.add_argument('--PETpath', type=str)
-parser.add_argument('--MRIpath', type=str)
-parser.add_argument('--talpath', type=str)
-parser.add_argument('--ITpath', type=str)
-parser.add_argument('--MNItemplatepath', type=str)
-parser.add_argument('--maskpath', type=str)
+parser.add_argument('weight', type=float)
+parser.add_argument('dose', type=float)
+parser.add_argument('PETpath', type=str)
+parser.add_argument('MRIpath', type=str)
+parser.add_argument('talpath', type=str)
+parser.add_argument('ITpath', type=str)
+parser.add_argument('MNItemplatepath', type=str)
+parser.add_argument('maskpath', type=str)
 parser.add_argument('--masknumber', type=int, default = 1)
 parser.add_argument('--mincconfigpath', type=str, default = "/opt/minc/1.9.16/minc-toolkit-config.sh")
 parser.add_argument('--mincbestlinregpath', type=str, default = "/opt/minc/1.9.16/bin/bestlinreg_s")
@@ -130,7 +142,7 @@ parser.add_argument('--blur_mm', type=int, default=8)
 
 args = parser.parse_args()
 
-main(args.weight, args.dose, args.PETpath, args.MRIpath, args.talpath, args.ITpath, args.MNItemplatepath, args.maskpath, args.masknumber, args.mincconfigpath, args.mincbestlinreg, args.blur_mm)
+main(args.weight, args.dose, args.PETpath, args.MRIpath, args.talpath, args.ITpath, args.MNItemplatepath, args.maskpath, args.masknumber, args.mincconfigpath, args.mincbestlinregpath, args.blur_mm)
 
 # bash input
-# 102 8.4 /Users/Labo-MAB/Desktop/automate_pet/ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc /Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1.mnc /Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1_tal.xfm /Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_nlfit_It.xfm /Users/Labo-MAB/Desktop/automate_pet/mni_icbm152_t1_tal_nlin_sym_09c.mnc /Users/Labo-MAB/Desktop/automate_pet/WM_0.99_new.mnc
+# 102.0 8.4 "/Users/Labo-MAB/Desktop/automate_pet/ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc" "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1.mnc" "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1_tal.xfm" "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_nlfit_It.xfm" "/Users/Labo-MAB/Desktop/automate_pet/mni_icbm152_t1_tal_nlin_sym_09c.mnc" "/Users/Labo-MAB/Desktop/automate_pet/WM_0.99_new.mnc"
