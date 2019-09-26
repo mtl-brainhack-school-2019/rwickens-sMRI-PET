@@ -86,7 +86,7 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         # output should be PETpath_avg_suv_autoreg_ST_SUVR.mnc
        
         #6B - Take the SUVR in patient space
-        PET_subjectmask = mylist[0]+"_subjectmask.mnc" # previously: 'PET_subjectmask.mnc'
+        PET_subjectmask = subject_code + "_subjectmask.mnc" # previously: 'PET_subjectmask.mnc'
         bash_command(['mincresample', '–like', mylist[-3], '–nearest', '–transform', outputPETpath_xfm, '–invert_transformation', maskpath, PET_subjectmask ]) 
         # bash_command('mincresample –like', mylist[-3], '–nearest –transform', outputPETpath_xfm, '–invert_transformation', maskpath, PET_subjectmask) 
         outputPETpath_patient = mylist_patient[-1]
