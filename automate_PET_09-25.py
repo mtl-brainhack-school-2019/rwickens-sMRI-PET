@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python3
 
 # Specifications: PET file is the one with multiple (6) frames. MRI file has already been run on CIVET
 # Weight, dose, and maskbinvalue are numeric (float). The rest are string.
@@ -14,9 +14,10 @@ import subprocess
 import os
 # from subprocess import PIPE
 
+print("hello")
+
 def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskpath, masknumber, mincconfigpath, mincbestlinregpath, blur_mm):
 
-    #working_dir = os.getcwd
     subject_code = os.path.basename(PETpath)
     subject_code = subject_code[:6]
     with open('output' + subject_code + '.txt', 'w') as f: 
@@ -110,9 +111,9 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         #9. Finished! Shows the subject's PET file on MNI template
         bash_command(['register', outputPETpath, MNItemplatepath])
 
-main(102, 8.4, "./ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc", "./FEOBV_PD_N50_01000104_t1.mnc", "./FEOBV_PD_N50_01000104_t1_tal.xfm", "./FEOBV_PD_N50_01000104_nlfit_It.xfm", "./mni_icbm152_tl_tal_nlin_sym_09c.mnc", "./WM_0.99_new.mnc", 1, "/opt/minc/1.9.16/minc-toolkit-config.sh", "/opt/minc/1.9.16/bin/bestlinreg_s", 8)
+# main(102, 8.4, "./ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc", "./FEOBV_PD_N50_01000104_t1.mnc", "./FEOBV_PD_N50_01000104_t1_tal.xfm", "./FEOBV_PD_N50_01000104_nlfit_It.xfm", "./mni_icbm152_tl_tal_nlin_sym_09c.mnc", "./WM_0.99_new.mnc", 1, "/opt/minc/1.9.16/minc-toolkit-config.sh", "/opt/minc/1.9.16/bin/bestlinreg_s", 8)
+# main(102, 8.4, "/Users/Labo-MAB/Desktop/automate_pet/ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1.mnc", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1_tal.xfm", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_nlfit_It.xfm", "/Users/Labo-MAB/Desktop/automate_pet/mni_icbm152_t1_tal_nlin_sym_09c.mnc", "/Users/Labo-MAB/Desktop/automate_pet/WM_0.99_new.mnc")
 
-"""
 parser = argparse.ArgumentParser('image processing inputs')
 parser.add_argument('--weight', type=float)
 parser.add_argument('--dose', type=float)
@@ -120,8 +121,8 @@ parser.add_argument('--PETpath', type=str)
 parser.add_argument('--MRIpath', type=str)
 parser.add_argument('--talpath', type=str)
 parser.add_argument('--ITpath', type=str)
-parser.add_argument('--MNItemplatepath', type=str, default = "./mni_icbm152_tl_tal_nlin_sym_09c.mnc")
-parser.add_argument('--maskpath', type=str, default = "./WM_0.99_new.mnc")
+parser.add_argument('--MNItemplatepath', type=str)
+parser.add_argument('--maskpath', type=str)
 parser.add_argument('--masknumber', type=int, default = 1)
 parser.add_argument('--mincconfigpath', type=str, default = "/opt/minc/1.9.16/minc-toolkit-config.sh")
 parser.add_argument('--mincbestlinregpath', type=str, default = "/opt/minc/1.9.16/bin/bestlinreg_s")
@@ -131,6 +132,5 @@ args = parser.parse_args()
 
 main(args.weight, args.dose, args.PETpath, args.MRIpath, args.talpath, args.ITpath, args.MNItemplatepath, args.maskpath, args.masknumber, args.mincconfigpath, args.mincbestlinreg, args.blur_mm)
 
-extra shit: def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskpath, masknumber, mincversion, blur_mm):
-
-"""
+# bash input
+# 102 8.4 /Users/Labo-MAB/Desktop/automate_pet/ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc /Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1.mnc /Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1_tal.xfm /Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_nlfit_It.xfm /Users/Labo-MAB/Desktop/automate_pet/mni_icbm152_t1_tal_nlin_sym_09c.mnc /Users/Labo-MAB/Desktop/automate_pet/WM_0.99_new.mnc
