@@ -4,15 +4,10 @@
 # Weight, dose, and maskbinvalue are numeric (float). The rest are string.
 # There are default values for masknumber, mincconfigpath, mincbestlinregpath, and blur. They are set to minc version 16
 
-
-
 from copy import deepcopy
 import argparse
 import subprocess
 import os
-# from subprocess import PIPE
-
-print("hello")
 
 def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskpath, masknumber, mincconfigpath, mincbestlinregpath, blur_mm):
 
