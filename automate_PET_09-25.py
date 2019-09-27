@@ -124,8 +124,6 @@ def main(weight, dose, PETpath, MRIpath, talpath, ITpath, MNItemplatepath, maskp
         #9. Finished! Shows the subject's PET file on MNI template
         bash_command(['register', outputPETpath, MNItemplatepath])
 
-# main(102, 8.4, "/Users/Labo-MAB/Desktop/automate_pet/ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1.mnc", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1_tal.xfm", "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_nlfit_It.xfm", "/Users/Labo-MAB/Desktop/automate_pet/mni_icbm152_t1_tal_nlin_sym_09c.mnc", "/Users/Labo-MAB/Desktop/automate_pet/WM_0.99_new.mnc")
-
 parser = argparse.ArgumentParser('image processing inputs')
 parser.add_argument('weight', type=float)
 parser.add_argument('dose', type=float)
@@ -143,6 +141,3 @@ parser.add_argument('--blur_mm', type=int, default=8)
 args = parser.parse_args()
 
 main(args.weight, args.dose, args.PETpath, args.MRIpath, args.talpath, args.ITpath, args.MNItemplatepath, args.maskpath, args.masknumber, args.mincconfigpath, args.mincbestlinregpath, args.blur_mm)
-
-# bash input
-# 102.0 8.4 "/Users/Labo-MAB/Desktop/automate_pet/ROYP01-FEOBV-HRRT1248-2017.8.16.15.50.9_EMMASK_4D_MC01.mnc" "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1.mnc" "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_t1_tal.xfm" "/Users/Labo-MAB/Desktop/automate_pet/FEOBV_PD_N50_01000104_nlfit_It.xfm" "/Users/Labo-MAB/Desktop/automate_pet/mni_icbm152_t1_tal_nlin_sym_09c.mnc" "/Users/Labo-MAB/Desktop/automate_pet/WM_0.99_new.mnc"
