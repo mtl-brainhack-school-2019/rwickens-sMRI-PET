@@ -41,6 +41,7 @@ def splice(path: Path, modifier) -> Path:
     if base_name.count(".") > 1:
         base_name.replace(".","")
     path = base_name.append(dir_name)
+    path = Path(path)
     return path.parent.joinpath(path.stem + modifier).with_suffix(path.suffix)
 
 def main(weight, dose, folder):
