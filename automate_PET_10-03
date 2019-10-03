@@ -157,7 +157,7 @@ def main(weight, dose, folder):
         """
         (Not needed unless dealing with .v files - such as with FDG)
         # 1. Change the file extension from .v to .mnc
-        outputPETpath = PETpath.with_suffix('mnc')
+        outputPETpath = PETpath.with_suffix('.mnc')
         mylist.append(outputPETpath)
         bash_command('ecattominc', '-short', PETpath, outputPETpath)
         """
@@ -175,6 +175,7 @@ def main(weight, dose, folder):
         bash_command('mincmath', '-div', mylist[-2], '-const', constant, outputPETpath)
 
         # 4. Automatic coregistration of subject PET to subject MRI to obtain .xfm files
+        outputPETpath_xfm = splice(outputPETpath_xfm, "_autoreg")
         xfmlist.append(outputPETpath_xfm)
         outputPETpath = splice(outputPETpath, "_autoreg")
         mylist.append(outputPETpath)
@@ -183,7 +184,7 @@ def main(weight, dose, folder):
         bash_command(mincbestlinregpath, '-nmi', '-lsq6', mylist[-2], MRIpath, outputPETpath_xfm, outputPETpath)
 
         # 5. Linear and non-linear transformations to put the PET file into MNI space (toST = to Standard Template)
-        outputPETpath_xfm = splice(outputPETpath_xfm, '_toST').with_suffix('xfm')
+        outputPETpath_xfm = splice(outputPETpath_xfm, '_toST').with_suffix('.xfm')
         xfmlist.append(outputPETpath_xfm)
         bash_command('xfmconcat', xfmlist[-2], talpath, ITpath, outputPETpath_xfm)
         outputPETpath = splice(outputPETpath, "_ST")
