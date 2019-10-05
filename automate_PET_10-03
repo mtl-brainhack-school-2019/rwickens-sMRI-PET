@@ -407,6 +407,8 @@ def main(weight, dose, folder):
         mylist.append(outputPETpath)
 
         bash_command('mincmath', '-div', '-const', mask_SUV, mylist[-2], outputPETpath)
+        
+        #subprocess.CalledProcessError: Command '['mincmath', '-div', '-const', "b'Mean:              0.01795409639\\n'", 'ROYP/ROYP01-FEOBV-HRRT_EMMASK_4D_MC01_avg_suv_autoreg_ST.mnc', 'ROYP/ROYP01-FEOBV-HRRT_EMMASK_4D_MC01_avg_suv_autoreg_ST_SUVR.mnc']' returned non-zero exit status 1.
 
 
 
