@@ -399,6 +399,9 @@ def main(weight, dose, folder):
             ['mincstats', '-mask', mask_or_atlas_path, '-mask_binvalue', maskbinvalue, outputPETpath, '-mean'])
 
         print("check output of mask_SUV gives", mask_SUV)    
+        
+        # output of "mask_SUV" is b'Mean:              0.01795409639\n
+        # needs to be encoded properly 
 
         # make multiple maskbinvalues possible here (csv); set shell=True and come up with method
 
