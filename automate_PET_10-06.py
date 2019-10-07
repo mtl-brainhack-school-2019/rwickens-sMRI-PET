@@ -249,7 +249,7 @@ def main(weight, dose, folder):
             templist.append(outputPETpath_patient)
             bash_command('mincblur', '-fwhm', i, mylist_patient[-2], outputPETpath_patient)
         mylist_patient.append("templist_patient")
-        """
+       
         # 8. Finished. Show the subject's PET file on MNI template
         bash_command('register', outputPETpath, MNItemplatepath)
 
