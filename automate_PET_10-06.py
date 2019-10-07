@@ -226,7 +226,7 @@ def main(weight, dose, folder):
         mask_SUV_patient = mask_SUV_patient.strip()
         mask_SUV_patient = re.sub("[^0-9]", "", mask_SUV_patient)        
         bash_command('mincmath', '-div', '-const', mask_SUV_patient, mylist_patient[-2], outputPETpath_patient)
-        """
+        
         # 7A. Blur PET in 4, 6, and 8mm
                 
         blurlist = [4, 6, 8]
@@ -234,24 +234,21 @@ def main(weight, dose, folder):
         deepcopyPETpath = deepcopy(outputPETpath) 
         for i in blurlist:
             blur_word = "_blur_" + str(i)
-            outputPETpath = splice(deepcopyPETpath, blur_word)
+            outputPETpath = splice(deepcopyPETpath, blur_word).with_suffix('')
             templist.append(outputPETpath)
             bash_command('mincblur', '-fwhm', i, mylist[-2], outputPETpath)
         mylist.append("templist")
-        #Note: Camille says minc automatically adds mnc extension here; should have extension removed from outputBlurPath
         
-        """
         # 7B. Blur PET in 4, 6, and 8 mm for patient space image
         blurlist = [4, 6, 8]
         templist_patient = []
         deepcopyPETpath_patient = deepcopy(outputPETpath_patient) 
         for i in blurlist: 
             blur_word = "_blur_" + str(i)
-            outputPETpath_patient = splice(deepcopyPETpath_patient, blur_word)
+            outputPETpath_patient = splice(deepcopyPETpath_patient, blur_word).with_suffix('')
             templist.append(outputPETpath_patient)
             bash_command('mincblur', '-fwhm', i, mylist_patient[-2], outputPETpath_patient)
         mylist_patient.append("templist_patient")
-            #Note: Camille says minc automatically adds mnc extension here; should have extension removed from outputBlurPath
         """
         # 8. Finished. Show the subject's PET file on MNI template
         bash_command('register', outputPETpath, MNItemplatepath)
