@@ -22,7 +22,6 @@ At a birds-eye-view, I have two intentions:
 This part I'm less excited about. Why?  
 
 - I'm at BrainHack because I like analyzing data, less so preprocessing it. (But, I need to get over this hump.)
-- Minctools isn't user-friendly
 - The instructions I've been passed down are a little rough. 
 
 <img src="https://github.com/rwickens/TestRepo/blob/master/Img1.PNG?raw=true" width=800> 
