@@ -408,7 +408,7 @@ def main(weight, dose, folder):
 
         mask_SUV = mask_SUV.strip()
 
-        mask_SUV = re.sub("[^0-9]", "", mask_SUV)
+        mask_SUV = re.sub("[^0-9.]", "", mask_SUV)
 
         outputPETpath = splice(outputPETpath, '_SUVR')
 
@@ -466,13 +466,13 @@ def main(weight, dose, folder):
 
         maskbinvalue = str(maskbinvalue)
 
-        mask_SUV_patient = subprocess.Popen(['mincstats', '-mask', PETsubjectmask, '–mask_binvalue', maskbinvalue, mylist_patient2, '–mean'])       
+        mask_SUV_patient = subprocess.Popen(['mincstats', '-mask', PETsubjectmask, 'Â–mask_binvalue', maskbinvalue, mylist_patient2, 'Â–mean'])       
 
         mask_SUV_patient = str(mask_SUV_patient)
 
         mask_SUV_patient = mask_SUV_patient.strip()
 
-        mask_SUV_patient = re.sub("[^0-9]", "", mask_SUV_patient)        
+        mask_SUV_patient = re.sub("[^0-9.]", "", mask_SUV_patient)        
 
         bash_command('mincmath', '-div', '-const', mask_SUV_patient, mylist_patient[-2], outputPETpath_patient)
 
