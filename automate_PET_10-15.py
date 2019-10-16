@@ -68,13 +68,25 @@ args = parser.parse_args()
 
 def splice(path: Path, modifier) -> Path:
 
-    stringPath = str(Path)
+    dir_name = str(os.path.dirname(path))
 
-    if stringPath.count(".") > 1:
+    base_name = str(os.path.basename(path))
 
-        print("Somewhere in your path, your folders have a '.' other than the file extension. Remove these and re-run the program.")
+    base_count = base_name.count(".")
 
-        raise SystemExit(0)
+    if base_count > 1:
+
+        base_count_until_last = base_count-1 
+
+        newbase = base_name.replace('.','-', base_count_until_last)
+
+        print("Your file names will be named ---", newbase, "--- extra periods '.' have been removed.")
+
+        newbase = Path(newbase)
+
+        dir_name = Path(dir_name)
+
+        path = dir_name / newbase
 
     return path.parent.joinpath(path.stem + modifier).with_suffix(path.suffix)
 
@@ -107,6 +119,8 @@ def main(weight, dose, folder):
     json_path = Path(os.getcwd(), 'config.json')
 
 
+
+    #if item in json file doesn't exist, depend on defaults... 
 
     if json_path.exists():
 
@@ -162,15 +176,13 @@ def main(weight, dose, folder):
 
 
 
-    # make the glob here somewhat recursive
+    PETpath = glob.glob(folder+"/*" + PETsuffix)
 
-    PETpath = glob.glob("**/*" + PETsuffix)
+    MRIpath = glob.glob(folder+"/*"+MRIsuffix)
 
-    MRIpath = glob.glob("**/*"+MRIsuffix)
+    talpath = glob.glob(folder+"/*"+talsuffix)
 
-    talpath = glob.glob("**/*"+talsuffix)
-
-    ITpath = glob.glob("**/*"+ITsuffix)
+    ITpath = glob.glob(folder+"/*"+ITsuffix)
 
     print(PETpath, MRIpath, talpath, ITpath)
 
@@ -503,3 +515,4 @@ def main(weight, dose, folder):
 
 
 main(**vars(args))
+
