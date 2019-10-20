@@ -1,4 +1,4 @@
-# STRUCTURAL MRI EXPLORATION
+# PET PIPELINE AUTOMATION AND STRUCTURAL MRI EXPLORATION
 
 PhD project: cholinergic PET imaging of people with REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Taking place at the Montreal Neurological Institute. Part of the ongoing Montreal RBD cohort study that tracks disease progression across time. 
 
