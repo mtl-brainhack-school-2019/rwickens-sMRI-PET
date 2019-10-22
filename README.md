@@ -4,11 +4,9 @@ PhD project: cholinergic PET imaging of people with REM sleep behaviour disorder
 
 My lab's particular focus is a new PET radiotracer (FEOBV) that shows great promise in quantifying brain cholinergic systems.    
 
-As of yet, my lab has used statistical parametric mapping as the main analysis. 
-
 <img src="https://github.com/rwickens/TestRepo/blob/master/FEOBV.jpg?raw=true" width=500> 
 
-I know there are other possibilities out there. I want to attempt to see what can be done to garner more attention to this radiotracer.   
+I want to attempt to see what can be done to garner more attention to this radiotracer.   
 
 At a birds-eye-view, I have two intentions:  
 
