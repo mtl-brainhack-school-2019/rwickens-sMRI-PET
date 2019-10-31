@@ -1,13 +1,12 @@
 #!/usr/bin/python
-# ^ won't be needed with _install_PET.py file 
 
 """-----------INFORMATION FOR USER:----------- 
-# PET file must have multiple frames. MRI file has already been run on CIVET
+# Three inputs to run the program: weight (kg), dose (mCi), and patient folder (full path needed)
 # Example input to run program: /home/minc/projectfile/automate_PET.py 102 8.4 /home/minc/projectfolder/patientfolder
-# Assumes you are in a directory containing patients' folders. 
-# Keep the json file in this directory, as well as the default files that the json points to.
-# You can adjust defaults on the configuration json file.
-# Note: This program will overwrite files if output name of minc function == existing file name  
+# Assumes you are in a project directory containing patients' folders.
+# In this patient folder, you must have the IT file, TAL file, GRID file, and T1 file from CIVET,
+# In the project directory, keep the json configuration file. Here, you can adjust defaults (e.g., mask used, standard template used)
+# Note: This program will overwrite files (if the file name of one of your ouputs already exists).   
 """
 
 from pathlib import Path
