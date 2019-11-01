@@ -2,12 +2,12 @@
 
 """-----------INFORMATION FOR USER:----------- 
 # Three inputs to run the program: weight (kg), dose (mCi), and patient folder (full path needed)
-# Example input to run program: python /home/minc/projectfile/automate_PET.py 102 8.4 /home/minc/projectfolder/patientfolder
+# Example input to run program: python /home/minc/projectfolder/automate_PET.py 102 8.4 /home/minc/projectfolder/patientfolder
 # Assumes you are in a project directory containing patients' folders.
 # In this patient folder, you must have the IT file, TAL file, GRID file, and T1 file from CIVET,
-# In the project directory, keep the json configuration file. In this file, you can change defaults (e.g, mask used, standard template used) 
-# If the json config is not present, program will look for WM mask file (WM_0.99_new.mnc) nd MNI standard template file (mni_icbm152_t1_tal_nlin_sym_09c.mnc) in this project folder.
-# Note: This program will overwrite files (if the file name of one of your ouputs already exists).   
+# In the project directory, keep the json configuration file. In this file, you can change defaults (e.g, mask (reference tissue) used, standard template used) 
+# If the json config is not present, program will look for WM mask file (WM_0.99_new.mnc) and MNI standard template file (mni_icbm152_t1_tal_nlin_sym_09c.mnc) in this project folder.
+# Note: This program will overwrite files (if the file name of one of your ouputs already exists in that folder).   
 """
 
 from pathlib import Path
@@ -19,6 +19,7 @@ from importlib import import_module
 import json
 import glob
 import re
+import statistics
 
 newest_minctools = max(glob.glob("/opt/minc/1.9.*"))
 MINC_DIR = Path(newest_minctools)
@@ -75,7 +76,7 @@ def main(weight, dose, patient_folder):
         ITsuffix = "_It.xfm"
         MNItemplatepath = projectdir / "mni_icbm152_t1_tal_nlin_sym_09c.mnc"
         mask_or_atlas_path = projectdir / "WM_0.99_new.mnc"
-        maskbinvalue = 1
+        maskbinvalue = [1]
         mincconfigpath = DEFAULT_MINC_CONFIG
         mincbestlinregpath = DEFAULT_MINC_BEST_LIN
         preferred_blur_list = [4,6,8]
@@ -97,36 +98,28 @@ def main(weight, dose, patient_folder):
         print("No grid file detected! Minc will likely raise an error about this during the transformations.")
     elif Path(gridpath[0]).parent != (Path(talpath[0]).parent or Path(ITpath[0]).parent) :
         print("Your grid file needs to be in the same folder as the TAL and IT files (CIVET)! This is likely to cause a problem later during the transformation stage")
-    if len(PETpath) == 1:
-        pass
-    elif len(PETpath) > 1: 
+    if len(PETpath) > 1: 
         print("Multiple PET files ending in", PETsuffix, ". Check that there is only one patient's files in this patient folder.")
         raise SystemExit(0)
-    else:
+    elif len(PETpath) == 0:
         print("No file found. Please check that your PETfile ends in", PETsuffix)
         raise SystemExit(0)
-    if len(MRIpath) == 1:
-        pass
-    elif len(MRIpath) > 1: 
+    if len(MRIpath) > 1: 
         print("Multiple PET files ending in", MRIsuffix, "check that the non-CIVET MRI file is not in this folder, and ensure that only one patient's files in this patient folder!")
         raise SystemExit(0)
-    else:
+    elif len(MRIpath) == 0:
         print("No file found. Please check that your PETfile ends in", MRIsuffix)
         raise SystemExit(0)
-    if len(PETpath) == 1:
-        pass
-    elif len(talpath) > 1: 
+    if len(talpath) > 1: 
         print("Multiple PET files ending in", talsuffix, "check that there is only one patient's files in this patient folder!")
         raise SystemExit(0)
-    else:
+    elif len(talpath) == 0:
         print("No file found. Please check that your PETfile ends in", talsuffix)
         raise SystemExit(0)
-    if len(ITpath) == 1:
-        pass
-    elif len(ITpath) > 1: 
+    if len(ITpath) > 1: 
         print("Multiple PET files ending in", ITsuffix, "check that there is only one patient's files in this patient folder!")
         raise SystemExit(0)
-    else:
+    elif len(ITpath) == 0:
         print("No file found. Please check that your PETfile ends in", ITsuffix)
         raise SystemExit(0)
 
@@ -162,9 +155,7 @@ def main(weight, dose, patient_folder):
         
         number_frames = subprocess.check_output(['mincinfo', '-dimlength', 'time', PETpath], universal_newlines = True)
         number_frames = str(number_frames)
-        print("number of frames is", number_frames)
-        number_frames = re.sub("[^0-9.]", "", number_frames)
-        print("the number of frames extracted is", number_frames)
+        print("number of frames extracted is", number_frames)
         number_frames = int(number_frames)
 
         staticfiles = []
@@ -174,8 +165,8 @@ def main(weight, dose, patient_folder):
             bash_command('mincreshape', '-clobber', '-dimrange', 'time=' + str(t), PETpath, staticfile)
         """
         """
-        # 1. Change the file extension from .v to .mnc
-        (Not needed unless dealing with .v files - such as with FDG)
+        # 1. Change the file extension from .v to .mnc - un-comment if this step is desired
+        # Not needed unless dealing with .v files - such as with FDG
 
         outputPETpath = PETpath.with_suffix('.mnc')
         mylist.append(outputPETpath)
@@ -218,15 +209,38 @@ def main(weight, dose, patient_folder):
         bash_command('mincresample', '-clobber', mylist[-3], '-like', MNItemplatepath, '-transform', outputPETpath_xfm,
                      outputPETpath)
 
-        # 6A. Take the SUVR in MNIspace        
+        # 6A. Take the SUVR in MNIspace  
+        
+        if len(maskbinvalue) == 1:
+            maskbinvalue = maskbinvalue[0]
+        else:
+            minicsv = ""
+            counter = 0
+            for i in maskbinvalue:
+                counter += 1
+                i = str(i)
+                minicsv += i
+                if counter != len(maskbinvalue):
+                    minicsv += ","
+            print("minicsv is:", minicsv)
+            maskbinvalue = minicsv
+
         mask_SUV = subprocess.check_output(['mincstats', '-mask', str(mask_or_atlas_path), '-mask_binvalue', str(maskbinvalue), str(outputPETpath), '-mean'], universal_newlines = True)
         mask_SUV = str(mask_SUV)
-        print("the output (mask_SUV) is", mask_SUV)
-        #f.write("the output (mask_SUV) is", mask_SUV)
-        mask_SUV = mask_SUV.strip()
-        mask_SUV = re.sub("[^0-9.]", "", mask_SUV)
-        print("the mask_SUV number extracted is", mask_SUV)
-        #f.write("the mask_SUV number extracted is", mask_SUV)
+        print("the raw output given by minc/bash is", mask_SUV)
+        #f.write("the raw output given by minc/bash is", mask_SUV)        
+        mask_SUV_split = mask_SUV.split()
+
+        means_array = []
+        for i in range(len(mask_SUV_split)):
+            if i != 0 and mask_SUV_split[i-1] == 'Mean:':
+                means_array.append(float(mask_SUV_split[i]))
+        print("the mean or means are")
+        print(means_array)
+        mask_SUV = statistics.mean(means_array)
+        mask_SUV = str(mask_SUV)
+        print("the extracted average of the mask section(s) is", mask_SUV)
+        #f.write("the extracted average of the mask section(s) is", mask_SUV)
         outputPETpath = splice(outputPETpath, '_SUVR')
         mylist.append(outputPETpath)
         bash_command('mincmath', '-clobber', '-div', '-const', mask_SUV, mylist[-2], outputPETpath)
@@ -254,12 +268,21 @@ def main(weight, dose, patient_folder):
         bash_command('mincresample', '-clobber', '-like', mylist_patient[-2], '-nearest', '-transform', outputPETpath_xfm, '-invert_transformation', mask_or_atlas_path, PETsubjectmask)
         mask_SUV_patient = subprocess.check_output(['mincstats', '-mask', str(PETsubjectmask), '-mask_binvalue', str(maskbinvalue), str(mylist_patient[-2]), '-mean'], universal_newlines = True)
         mask_SUV_patient = str(mask_SUV_patient)
-        print("the output (mask_SUV_patient) is", mask_SUV_patient)
-        #f.write("the output (mask_SUV_patient) is", mask_SUV_patient)
-        mask_SUV_patient = mask_SUV_patient.strip()
-        mask_SUV_patient = re.sub("[^0-9.]", "", mask_SUV_patient)
-        print("the mask_SUV_patient number extracted is", mask_SUV_patient)
-        #f.write("the mask_SUV_patient number extracted is", mask_SUV_patient)         
+        print("the raw output on minc/bash is", mask_SUV_patient)
+        #f.write("the raw output on minc/bash is", mask_SUV_patient)
+
+        mask_SUV_patient_split = mask_SUV_patient.split()
+
+        means_array_patient = []
+        for i in range(len(mask_SUV_patient_split)):
+            if i != 0 and mask_SUV_patient_split[i-1] == 'Mean:':
+                means_array_patient.append(float(mask_SUV_patient_split[i]))
+        print("the extracted mean or means are")
+        print(means_array_patient)
+        mask_SUV_patient = statistics.mean(means_array_patient)
+        mask_SUV_patient = str(mask_SUV_patient)
+        print("the extracted average of the mask section(s) is", mask_SUV_patient)
+        #f.write("the extracted average of the mask section(s) is", mask_SUV)       
         outputPETpath_patient = splice(mylist_patient[-1], '_patient_SUVR')
         mylist_patient.append(outputPETpath_patient)
         bash_command('mincmath', '-clobber', '-div', '-const', mask_SUV_patient, mylist_patient[-2], outputPETpath_patient)
