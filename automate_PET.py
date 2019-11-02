@@ -130,7 +130,7 @@ def main(weight, dose, patient_folder):
 
     patient_code = str(os.path.basename(patient_folder)) 
     
-    with open(patient_folder + "/" + patient_code + '_output_log.txt', 'w') as f:
+    with open(patient_folder + '/_output_log_' + patient_code + '.txt', 'w') as f:
         def bash_command(*args):
             bash_output = subprocess.check_output([str(c) for c in args], universal_newlines=True)
             bash_output = str(bash_output)
@@ -155,18 +155,18 @@ def main(weight, dose, patient_folder):
         
         number_frames = subprocess.check_output(['mincinfo', '-dimlength', 'time', PETpath], universal_newlines = True)
         number_frames = str(number_frames)
-        print("number of frames extracted is", number_frames)
+        print("number of frames extracted is " + number_frames)
         number_frames = int(number_frames)
 
         staticfiles = []
         for t in range(number_frames):
             t = str(t)
-            staticfile = patient_folder+"/" + patient_code + "frame_{}.mnc".format(t)
+            staticfile = patient_folder+"/_" + patient_code + "frame_{}.mnc".format(t)
             bash_command('mincreshape', '-clobber', '-dimrange', 'time=' + str(t), PETpath, staticfile)
         """
         """
         # 1. Change the file extension from .v to .mnc - un-comment if this step is desired
-        # Not needed unless dealing with .v files - such as with FDG
+        # Needed if dealing with .v files - such as with FDG
 
         outputPETpath = PETpath.with_suffix('.mnc')
         mylist.append(outputPETpath)
@@ -209,8 +209,15 @@ def main(weight, dose, patient_folder):
         bash_command('mincresample', '-clobber', mylist[-3], '-like', MNItemplatepath, '-transform', outputPETpath_xfm,
                      outputPETpath)
 
-        # 6A. Take the SUVR in MNIspace  
-        
+        # 6A. Take the SUVR in MNIspace
+          
+        number_regions = subprocess.check_output(['volume_stats', '-quiet', '-max', mask_or_atlas_path], universal_newlines = True)
+        number_regions = str(number_regions)
+        f.write("number of regions in atlas is " + number_regions)
+        if int(number_regions) > 1:
+            mask_or_atlas_resampled = patient_folder + "/_atlas_mask_resampled_" + patient_code + ".mnc "
+            bash_command('mincresample', '-clobber', '-like', outputPETpath, '-nearest', mask_or_atlas_path, mask_or_atlas_resampled)
+            mask_or_atlas_path = mask_or_atlas_resampled
         if len(maskbinvalue) == 1:
             maskbinvalue = maskbinvalue[0]
         else:
@@ -228,19 +235,19 @@ def main(weight, dose, patient_folder):
         mask_SUV = subprocess.check_output(['mincstats', '-mask', str(mask_or_atlas_path), '-mask_binvalue', str(maskbinvalue), str(outputPETpath), '-mean'], universal_newlines = True)
         mask_SUV = str(mask_SUV)
         print("the raw output given by minc/bash is", mask_SUV)
-        #f.write("the raw output given by minc/bash is", mask_SUV)        
+        f.write("the raw output given by minc/bash is " + mask_SUV)        
         mask_SUV_split = mask_SUV.split()
 
         means_array = []
         for i in range(len(mask_SUV_split)):
             if i != 0 and mask_SUV_split[i-1] == 'Mean:':
                 means_array.append(float(mask_SUV_split[i]))
-        print("the mean or means are")
-        print(means_array)
+        print("the mean or means are", means_array)
+        f.write("the mean or means are "+ str(means_array))
         mask_SUV = statistics.mean(means_array)
         mask_SUV = str(mask_SUV)
         print("the extracted average of the mask section(s) is", mask_SUV)
-        #f.write("the extracted average of the mask section(s) is", mask_SUV)
+        f.write("the extracted average of the mask section(s) is " + str(mask_SUV))
         outputPETpath = splice(outputPETpath, '_SUVR')
         mylist.append(outputPETpath)
         bash_command('mincmath', '-clobber', '-div', '-const', mask_SUV, mylist[-2], outputPETpath)
@@ -264,12 +271,12 @@ def main(weight, dose, patient_folder):
 
         # 6B - Take the SUVR in patient space
         
-        PETsubjectmask = patient_folder + "/" + patient_code + "_subjectmask.mnc"
+        PETsubjectmask = patient_folder + "/_subject_mask_" + patient_code + ".mnc"
         bash_command('mincresample', '-clobber', '-like', mylist_patient[-2], '-nearest', '-transform', outputPETpath_xfm, '-invert_transformation', mask_or_atlas_path, PETsubjectmask)
         mask_SUV_patient = subprocess.check_output(['mincstats', '-mask', str(PETsubjectmask), '-mask_binvalue', str(maskbinvalue), str(mylist_patient[-2]), '-mean'], universal_newlines = True)
         mask_SUV_patient = str(mask_SUV_patient)
         print("the raw output on minc/bash is", mask_SUV_patient)
-        #f.write("the raw output on minc/bash is", mask_SUV_patient)
+        f.write("the raw output on minc/bash is" + mask_SUV_patient)
 
         mask_SUV_patient_split = mask_SUV_patient.split()
 
@@ -277,12 +284,12 @@ def main(weight, dose, patient_folder):
         for i in range(len(mask_SUV_patient_split)):
             if i != 0 and mask_SUV_patient_split[i-1] == 'Mean:':
                 means_array_patient.append(float(mask_SUV_patient_split[i]))
-        print("the extracted mean or means are")
-        print(means_array_patient)
+        print("the mean or means are (in patient-space) ", means_array_patient)
+        f.write("the mean or means are (in patient-space) " + str(means_array_patient))
         mask_SUV_patient = statistics.mean(means_array_patient)
         mask_SUV_patient = str(mask_SUV_patient)
         print("the extracted average of the mask section(s) is", mask_SUV_patient)
-        #f.write("the extracted average of the mask section(s) is", mask_SUV)       
+        f.write("the extracted average of the mask section(s) is " + mask_SUV_patient)       
         outputPETpath_patient = splice(mylist_patient[-1], '_patient_SUVR')
         mylist_patient.append(outputPETpath_patient)
         bash_command('mincmath', '-clobber', '-div', '-const', mask_SUV_patient, mylist_patient[-2], outputPETpath_patient)
