@@ -38,14 +38,7 @@ This part I'm less excited about. Why?
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfDhejxni_K2Gr-ItywgveUqpeeN-6LBfab93Svi6WyHVBMZ62" width=100> 
 
-- A Jupyter notebook with clarified pipeline instructions. 
-    - Code will be in bash
-    - Will contain more comments
-    - Will briefly explain the rationale behind the processing steps, with particular attention to order.  
-
-This will hopefully ease stress of future lab members. 
-
-In the future, I hope to write a script that automates these steps, eliminating the need for the above jupyter file.  
+Write a script that automates the lab's pipeline steps.  
 
 -----------------------
 
