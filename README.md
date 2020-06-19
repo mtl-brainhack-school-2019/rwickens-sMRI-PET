@@ -22,11 +22,6 @@ This part I'm less excited about. Why?
 - I'm at BrainHack because I like analyzing data, less so preprocessing it. (But, I need to get over this hump.)
 - The instructions I've been passed down are a little rough. 
 
-<img src="https://github.com/rwickens/TestRepo/blob/master/Img1.PNG?raw=true" width=800> 
-
-<img src="https://github.com/rwickens/TestRepo/blob/master/Img2.jpg?raw=true" width=350> 
-
-
 ### Goals
 
 1. Understand my lab's preprocessing pipeline.   
