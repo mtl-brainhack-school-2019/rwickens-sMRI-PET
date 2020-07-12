@@ -1,6 +1,6 @@
 # PET PIPELINE AUTOMATION AND STRUCTURAL MRI EXPLORATION
 
-Hi, I'm Rebekah Wickens. PhD project: cholinergic PET imaging of people with REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Taking place at the Montreal Neurological Institute. Part of the ongoing Montreal RBD cohort study that tracks disease progression across time. 
+PhD project: cholinergic PET imaging of people with REM sleep behaviour disorder (prodromal stage of Parkinson's / Lewy body dementia). Taking place at the Montreal Neurological Institute. Part of the ongoing Montreal RBD cohort study that tracks disease progression across time. 
 
 My lab's particular focus is a new PET radiotracer (FEOBV) that shows great promise in quantifying brain cholinergic systems.    
 
